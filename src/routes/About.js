@@ -29,10 +29,13 @@ export default function About() {
             </div>
             <h2 className='mt-6 mb-2 text-3xl font-rye'>Language</h2>
             <div>Please be resepctful to other players. Avoid profanities in chat or picking controversial names.</div>
-            <h2 className='mt-6 mb-2 text-3xl font-rye'>Most important</h2>
+            <h2 className='mt-6 mb-2 text-3xl font-rye'>Most importantly</h2>
             <div>Have fun!</div>
             <br />
             <br />
+            <div className='flex items-center justify-center'>
+                <img src={require("../img/Example.png")} className='w-[95%]' alt="game example" />
+            </div>
             <br />
             <br />
             <div className='flex justify-center items-center space-x-2'>
@@ -50,7 +53,6 @@ export default function About() {
                     GitHub
                 </a>
             </div>
-
         </div>
     </div>
   )
