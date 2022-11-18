@@ -116,7 +116,7 @@ export default function Card({ socket, card, setActiveCard, setSelectPlayerTarge
       onClick={handleClick} 
       style={styles} 
       className='w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>
-      <img src={cardSource} alt="" />
+      {/* <img src={cardSource} alt="" /> */}
       <div className='hidden p-1 z-40 font-rye absolute group-hover:flex group-hover:flex-col group-hover:justify-center translate-y-[-60px] bg-transparentBlack text-white'>
         <div className='text-xl'>
           {cardName}
@@ -125,6 +125,7 @@ export default function Card({ socket, card, setActiveCard, setSelectPlayerTarge
           {cardDigit} {cardType}
         </div>
       </div>
+          {cardName}
     </button>
   )
 }
