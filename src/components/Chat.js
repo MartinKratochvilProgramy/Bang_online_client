@@ -24,9 +24,9 @@ export default function Chat({ sendMessage, messages }) {
             className={`bg-beige ml-0 rounded p-2 text-sm xs:text-md overflow-auto w-full h-[120px] xs:h-[200px] font-rye`}
             value={messagesOutput}
         >
-            {messages.map(message => {
+            {messages.map((message, index) => {
                 return(
-                    <div className='flex flex-row w-full text-start'>
+                    <div key={index} className='flex flex-row w-full text-start'>
                         <div className=''>
                             {message.username}:
                         </div>
