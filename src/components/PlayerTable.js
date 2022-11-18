@@ -70,6 +70,7 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
         {table.map(card => {
           return(
             <CardOnTable 
+              key={card.name + card.digit + card.type}
               socket={socket}
               username={username}
               currentRoom={currentRoom}

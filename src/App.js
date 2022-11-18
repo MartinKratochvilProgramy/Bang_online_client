@@ -1,5 +1,4 @@
 import "./App.css";
-import io from "socket.io-client";
 import { useState, useEffect, useRef } from "react";
 import RoomSelect from "./components/RoomSelect";
 import Room from "./components/Room";
@@ -8,8 +7,9 @@ import GameEnd from './components/GameEnd';
 import EmporionChoice from './components/EmporionChoice';
 import DrawChoice from './components/DrawChoice';
 
+import {socket} from './socket'
+
 // SRC: https://github.com/machadop1407/socket-io-react-example
-const socket = io.connect("https://bangonlineserver-production.up.railway.app/");
 
 function App() {
 
@@ -93,25 +93,25 @@ function App() {
       }
     })
 
-    socket.on("current_player", playerName => {
+    socket.off("current_player").on("current_player", playerName => {
       if (username === "") return;
       if (currentRoom === null) return;
       setCurrentPlayer(playerName);
       socket.emit("get_my_hand", {username, currentRoom});
     })
 
-    socket.on("my_role", role => {
-      console.log("my role: ", role); // TODO: this runs multiple times??? 
+    socket.off("my_role").on("my_role", role => {
+      // console.log("my role: ", role); 
       setRole(role);
     })
 
-    socket.on("known_roles", roles => {
-      console.log("known roles: ", roles); // TODO: this runs multiple times??? 
+    socket.off("known_roles").on("known_roles", roles => {
+      // console.log("known roles: ", roles); 
       setKnownRoles(roles);
     })
 
-    socket.on("my_hand", hand => {
-      console.log("my hand: ", hand); // TODO: this runs multiple times??? 
+    socket.off("my_hand").on("my_hand", hand => {
+      // console.log("my hand: ", hand); 
       setMyHand(hand);
     })
 
@@ -119,7 +119,7 @@ function App() {
       setMyDrawChoice(hand);
     })
 
-    socket.on("update_hands", () => {
+    socket.off("update_hands").on("update_hands", () => {
       if (username === "") return;
       if (currentRoom === null) return;
       socket.emit("get_my_hand", {username, currentRoom});
@@ -160,7 +160,7 @@ function App() {
     })
 
   }, [username, currentRoom, character, consoleOutput])
-  
+
   const leaveRoom = () => {
     socket.emit("leave_room", {username, currentRoom});
     setAdmin(false);
