@@ -7,7 +7,7 @@ import CardOnTable from './CardOnTable';
 
 export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
     indianiActive, discarding, character, role, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
-    selectPlayerTarget, setDiscarding, setDeckActive, playersLosingHealth}) {
+    selectPlayerTarget, setDiscarding, setDeckActive, playersLosingHealth, setPlayersLosingHealth, predictUseCard, setAllNotPlayable}) {
 
   function cancelTargetSelect() {
     setSelectPlayerTarget(false);
@@ -17,6 +17,14 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
   
   function loseHealth() {
     setCharacterUsable(false);
+    const newPlayersLosingHealth = playersLosingHealth;
+    for (const player of newPlayersLosingHealth) {
+      if (player.name === username) {
+        player.isLosingHealth = false
+      }
+    }
+    setPlayersLosingHealth(newPlayersLosingHealth);
+    setAllNotPlayable();
     socket.emit("lose_health", {username, currentRoom})
   }
 
@@ -27,6 +35,7 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
       setSelectCardTarget(false);
       setDeckActive(false);
     } else {
+      setAllNotPlayable();
       setDiscarding(false);
       setSelectPlayerTarget(false);
       setSelectCardTarget(false);
@@ -129,6 +138,10 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
                   indianiActive={indianiActive}
                   discarding={discarding}
                   character={character}
+                  predictUseCard={predictUseCard}
+                  setAllNotPlayable={setAllNotPlayable}
+                  myHand={myHand}
+                  myHealth={myHealth}
                   />
               )
           })}

@@ -6,7 +6,7 @@ import Console from './Console';
 import StackDeck from './StackDeck';
 import CharacterChoice from './CharacterChoice';
 
-export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, socket, currentRoom, currentPlayer, playersLosingHealth, playersActionRequiredOnStart, topStackCard, duelActive, 
+export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, socket, currentRoom, currentPlayer, playersLosingHealth, setPlayersLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
   indianiActive, emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
   
   const [nextTurn, setNextTurn] = useState(true);
@@ -94,25 +94,26 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     if (!selectPlayerTarget) return;
     setSelectPlayerTarget(false);
     setSelectCardTarget(false);
+    const cardName = activeCard.name;
     const cardDigit = activeCard.digit;
     const cardType = activeCard.type;
    
-    if (activeCard.name === "Bang!") {
+    if (cardName === "Bang!") {
       socket.emit("play_bang", {username, target, currentRoom, cardDigit, cardType});
 
-    } else if (activeCard.name === "Mancato!" && character === "Calamity Janet") {
+    } else if (cardName === "Mancato!" && character === "Calamity Janet") {
       socket.emit("play_mancato_as_CJ", {target, currentRoom, cardDigit, cardType});
 
-    } else if (activeCard.name === "Duel") {
+    } else if (cardName === "Duel") {
       socket.emit("play_duel", {target, currentRoom, cardDigit, cardType});
 
-    } else if (activeCard.name === "Cat Balou") {
+    } else if (cardName === "Cat Balou") {
       socket.emit("play_cat_ballou", {target, currentRoom, cardDigit, cardType});
 
-    } else if (activeCard.name === "Panico") {
+    } else if (cardName === "Panico") {
       socket.emit("play_panico", {target, currentRoom, cardDigit, cardType});
 
-    } else if (activeCard.name === "Prigione") {
+    } else if (cardName === "Prigione") {
       socket.emit("play_prigione", {username, target, currentRoom, activeCard});
 
     } else if (Object.keys(activeCard).length === 0 && character === "Jesse Jones") {
@@ -121,6 +122,8 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
       setCharacterUsable(false);
       setDeckActive(false);
     }
+    predictUseCard(cardName, cardDigit, cardType);
+    setAllNotPlayable();
     setActiveCard({});
   }
   
@@ -133,6 +136,8 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     } else if (activeCard.name === "Panico") {
       socket.emit("play_panico_on_table_card", { activeCard, username, target: cardName, currentRoom, cardDigit, cardType });
     }
+    predictUseCard(cardName, cardDigit, cardType);
+    setAllNotPlayable();
     setActiveCard({});
   }
 
@@ -163,6 +168,23 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     setSelectPlayerTarget(false);
     setDeckActive(false);
     setNextTurn(true);
+  }
+
+  function predictUseCard(cardName, cardDigit, cardType) {
+    // place card on stack
+    setTopStackCard({name: cardName, digit: cardDigit, type: cardType});
+    // splice card from my hand
+    const newMyHand = myHand;
+    const cardIndex = myHand.findIndex(card => (card.name === cardName && card.digit === cardDigit && card.type === cardType));
+    newMyHand.splice(cardIndex, 1);
+  }
+  
+  function setAllNotPlayable() {
+    const newMyHand = myHand;
+    for (const card of newMyHand) {
+      card.isPlayable = false;
+    }
+    setMyHand(newMyHand);
   }
   
   return (
@@ -221,6 +243,8 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
             <PlayerTable
               socket={socket}
               myHand={myHand}
+              setMyHand={setMyHand}
+              setTopStackCard={setTopStackCard}
               table={allPlayersInfo.filter(player => {return(player.name === username)})[0].table}
               setSelectPlayerTarget={setSelectPlayerTarget}
               setSelectCardTarget={setSelectCardTarget}
@@ -244,6 +268,9 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
               setDiscarding={setDiscarding}
               setDeckActive={setDeckActive}
               playersLosingHealth={playersLosingHealth}
+              setPlayersLosingHealth={setPlayersLosingHealth}
+              predictUseCard={predictUseCard}
+              setAllNotPlayable={setAllNotPlayable}
             />
             <Console socket={socket} consoleOutput={consoleOutput} />
           </div>
