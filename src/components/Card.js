@@ -124,7 +124,6 @@ export default function Card({ socket, card, setActiveCard, setSelectPlayerTarge
       
       } else if (card.rimColor === "blue" && cardName !== "Prigione") {
         socket.emit("place_blue_card_on_table", {username, currentRoom, card});
-        predictUseCard(cardName, cardDigit, cardType);
         setAllNotPlayable();
 
       } else if (cardName === "Prigione") {
