@@ -29,6 +29,8 @@ export default function About() {
             </div>
             <h2 className='mt-6 mb-2 text-3xl font-rye'>Language</h2>
             <div>Please be resepctful to other players. Avoid profanities in chat or picking controversial names.</div>
+            <h2 className='mt-6 mb-2 text-3xl font-rye'>1v1 mode</h2>
+            <div>Bang! online also has 1v1 mode where your goal is simply to kill your opponent.</div>
             <h2 className='mt-6 mb-2 text-3xl font-rye'>Most importantly</h2>
             <div>Have fun!</div>
             <br />
