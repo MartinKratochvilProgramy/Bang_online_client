@@ -9,7 +9,7 @@ import EmporionChoice from './components/EmporionChoice';
 import DrawChoice from './components/DrawChoice';
 
 // SRC: https://github.com/machadop1407/socket-io-react-example
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://bangonline.netlify.app/");
 
 function App() {
 
