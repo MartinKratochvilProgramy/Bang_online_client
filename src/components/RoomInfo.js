@@ -18,7 +18,7 @@ export default function RoomInfo({ room, joinRoom }) {
             </div>
             {(!room.gameActive && room.numOfPlayers < 6) && <Button onClick={joinRoom} value={"Join room"} size={1.5} />}
             {room.gameActive && <p className='text-gray-700'>Game in progress...</p>}
-            {room.numOfPlayers && !room.gameActive >= 6 && <p className='text-gray-700'>Room full</p>}
+            {(room.numOfPlayers >= 6 && !room.gameActive) && <p className='text-gray-700'>Room full</p>}
 
             
     </div>
