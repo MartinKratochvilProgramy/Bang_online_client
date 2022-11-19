@@ -47,7 +47,7 @@ export default function About() {
                     alt="GitHub_logo"
                     />
                 <a 
-                    href="https://github.com/MartinKratochvilProgramy" 
+                    href="https://github.com/MartinKratochvilProgramy/Bang_online_server" 
                     className='text-2xl font-rye text-gray-800 hover:text-black underline underline-offset-4'
                     target="_blank" 
                     rel="noopener noreferrer"
