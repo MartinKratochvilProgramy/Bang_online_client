@@ -12,6 +12,10 @@ export default function StackDeck({ socket, username, currentRoom, currentPlayer
     cardstyles = {border: "solid 2px red", cursor: "pointer"}
   }
 
+  if (topStackCard !== null && topStackCard.isPlayable === true) {
+    topStackCard.isPlayable = false;
+  }
+
     return (
     <div className='flex space-x-4'>
 

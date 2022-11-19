@@ -46,7 +46,7 @@ export default function RoomSelect({ setUsername, socket, setCurrentRoom, userna
               <div className={`inline-grid gap-6 justify-center items-center ${gridStyle}`}>
                 {rooms.map(room => {
                     return (
-                        <RoomInfo room={room} joinRoom={() => joinRoom(room.name)} />
+                        <RoomInfo key={room} room={room} joinRoom={() => joinRoom(room.name)} />
                         )
                     })}
               </div>

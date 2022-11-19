@@ -7,7 +7,7 @@ import CardOnTable from './CardOnTable';
 
 export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
     indianiActive, discarding, character, role, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
-    selectPlayerTarget, setDiscarding, setDeckActive, playersLosingHealth, setPlayersLosingHealth, predictUseCard, setAllNotPlayable}) {
+    selectPlayerTarget, setDiscarding, setDeckActive, isLosingHealth, setIsLosingHealth, predictUseCard, predictUseBlueCard, setAllNotPlayable, setNextTurn}) {
 
   function cancelTargetSelect() {
     setSelectPlayerTarget(false);
@@ -17,13 +17,7 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
   
   function loseHealth() {
     setCharacterUsable(false);
-    const newPlayersLosingHealth = playersLosingHealth;
-    for (const player of newPlayersLosingHealth) {
-      if (player.name === username) {
-        player.isLosingHealth = false
-      }
-    }
-    setPlayersLosingHealth(newPlayersLosingHealth);
+    setIsLosingHealth(false);
     setAllNotPlayable();
     socket.emit("lose_health", {username, currentRoom})
   }
@@ -140,9 +134,12 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
                   discarding={discarding}
                   character={character}
                   predictUseCard={predictUseCard}
+                  predictUseBlueCard={predictUseBlueCard}
                   setAllNotPlayable={setAllNotPlayable}
                   myHand={myHand}
                   myHealth={myHealth}
+                  setNextTurn={setNextTurn}
+                  endTurn={endTurn}
                   />
               )
           })}
@@ -153,14 +150,8 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
             {(currentPlayer === username && nextTurn && !characterUsable && emporioState.length === 0 && !(myDrawChoice.length > 0)) && <Button onClick={endTurn} value={"End turn"} size={1.2} />}
             {(selectPlayerTarget && nextTurn && currentPlayer === username) && <Button onClick={cancelTargetSelect} value={"Cancel"} size={1.2} /> }
             {discarding && <Button onClick={() => setDiscarding(false)} value={"Cancel"} size={1.2} />}
-            {playersLosingHealth.map((player) => {
-                if (player.name === username && player.isLosingHealth) {
-                return (
-                    <Button key={player.name} onClick={loseHealth} value={"Lose health"} size={1.2} />
-                )
-                }
-                return (null)
-            })}
+            {isLosingHealth && <Button onClick={loseHealth} value={"Lose health"} size={1.2} />}
+            
           </div>
 
       </div>

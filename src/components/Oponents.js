@@ -24,7 +24,7 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
 
     if (oponentsInfo.length === 1) {
         return (
-          <div className='w-[490px] xs:w-[560px] z-50 fixed left-[50%] translate-x-[-50%]'>
+          <div className='w-[390px] xs:w-[560px] z-50 fixed left-[50%] translate-x-[-50%]'>
               <TopPlayerTable
                 socket={socket}
                 cardsInHand={new Array(oponentsInfo[0].numberOfCards).fill(0)}

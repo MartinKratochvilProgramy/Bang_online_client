@@ -33,6 +33,7 @@ function App() {
   const [allPlayersInfo, setAllPlayersInfo] = useState([]);
   const [allCharactersInfo, setAllCharactersInfo] = useState([]);
   const [playersLosingHealth, setPlayersLosingHealth] = useState([]);
+  const [isLosingHealth, setIsLosingHealth] = useState(false);
   const [playersActionRequiredOnStart, setPlayersActionRequiredOnStart] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState("");
   const [topStackCard, setTopStackCard] = useState(null);
@@ -127,6 +128,18 @@ function App() {
 
     socket.on("update_players_losing_health", (players) => {
       setPlayersLosingHealth(players);
+
+      let playerFound = false;
+      for (const player of players) {
+        if (player.name === username && player.isLosingHealth) {
+          playerFound = true;
+        }
+      }
+      if (playerFound) {
+        setIsLosingHealth(true)
+      } else {
+        setIsLosingHealth(false)
+      }
     })
 
     socket.on("update_players_with_action_required", (players) => {
@@ -182,13 +195,22 @@ function App() {
   function getEmporioCard(card) {
     if (username !== nextEmporioTurn) return;
     socket.emit("get_emporio_card", {username, currentRoom, card});
+
+    const newEmporioState = emporioState;
+    const cardIndex = myHand.findIndex(foundCard => (foundCard.name === card.name && foundCard.digit === card.digit && foundCard.type === card.type));
+    newEmporioState.splice(cardIndex, 1);
+    setEmporioState(newEmporioState);
   }
-    
+  
   function getChoiceCard(card) {
     setCharacterUsable(false);
     if (character === "Kit Carlson") {
+      setMyHand([...myHand, card]);
+      
       socket.emit("get_choice_card_KC", {username, currentRoom, card});
     } else if (character === "Lucky Duke") {
+      setMyHand([...myHand, card]);
+      
       socket.emit("get_choice_card_LD", {username, currentRoom, card});
     }
   }
@@ -245,8 +267,9 @@ function App() {
             currentRoom={currentRoom}
             setCurrentRoom={setCurrentRoom}
             currentPlayer={currentPlayer}
+            isLosingHealth={isLosingHealth}
             playersLosingHealth={playersLosingHealth}
-            setPlayersLosingHealth={setPlayersLosingHealth}
+            setIsLosingHealth={setIsLosingHealth}
             playersActionRequiredOnStart={playersActionRequiredOnStart}
             topStackCard={topStackCard}
             setTopStackCard={setTopStackCard}

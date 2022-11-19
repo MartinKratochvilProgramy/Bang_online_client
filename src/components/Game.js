@@ -6,7 +6,7 @@ import Console from './Console';
 import StackDeck from './StackDeck';
 import CharacterChoice from './CharacterChoice';
 
-export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, socket, currentRoom, currentPlayer, playersLosingHealth, setPlayersLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
+export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, socket, currentRoom, currentPlayer, playersLosingHealth, isLosingHealth, setIsLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
   indianiActive, emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
   
   const [nextTurn, setNextTurn] = useState(true);
@@ -25,9 +25,7 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     // disable next turn button if health decision req on other players
     for (const player of playersLosingHealth) {
       if (player.isLosingHealth) {
-
-        setNextTurn(false);
-        break;
+        setNextTurn(false)
       }
     }
   }, [playersLosingHealth])
@@ -100,12 +98,15 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
    
     if (cardName === "Bang!") {
       socket.emit("play_bang", {username, target, currentRoom, cardDigit, cardType});
+      setNextTurn(false);
 
     } else if (cardName === "Mancato!" && character === "Calamity Janet") {
       socket.emit("play_mancato_as_CJ", {target, currentRoom, cardDigit, cardType});
+      setNextTurn(false);
 
     } else if (cardName === "Duel") {
       socket.emit("play_duel", {target, currentRoom, cardDigit, cardType});
+      setNextTurn(false);
 
     } else if (cardName === "Cat Balou") {
       socket.emit("play_cat_ballou", {target, currentRoom, cardDigit, cardType});
@@ -122,8 +123,10 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
       setCharacterUsable(false);
       setDeckActive(false);
     }
-    predictUseCard(cardName, cardDigit, cardType);
-    setAllNotPlayable();
+    if (cardName !== "Prigione") {
+      predictUseCard(cardName, cardDigit, cardType);
+      setAllNotPlayable();
+    }
     setActiveCard({});
   }
   
@@ -137,7 +140,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
       socket.emit("play_panico_on_table_card", { activeCard, username, target: cardName, currentRoom, cardDigit, cardType });
     }
     predictUseCard(cardName, cardDigit, cardType);
-    setAllNotPlayable();
     setActiveCard({});
   }
 
@@ -177,6 +179,16 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     const newMyHand = myHand;
     const cardIndex = myHand.findIndex(card => (card.name === cardName && card.digit === cardDigit && card.type === cardType));
     newMyHand.splice(cardIndex, 1);
+    setMyHand(newMyHand);
+  }
+
+  function predictUseBlueCard(cardName, cardDigit, cardType) {
+    // splice card from my hand
+    const newMyHand = myHand;
+    const cardIndex = myHand.findIndex(card => (card.name === cardName && card.digit === cardDigit && card.type === cardType));
+    newMyHand.splice(cardIndex, 1);
+
+    setMyHand(newMyHand);
   }
   
   function setAllNotPlayable() {
@@ -267,10 +279,12 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
               selectPlayerTarget={selectPlayerTarget}
               setDiscarding={setDiscarding}
               setDeckActive={setDeckActive}
-              playersLosingHealth={playersLosingHealth}
-              setPlayersLosingHealth={setPlayersLosingHealth}
+              isLosingHealth={isLosingHealth}
+              setIsLosingHealth={setIsLosingHealth}
               predictUseCard={predictUseCard}
+              predictUseBlueCard={predictUseBlueCard}
               setAllNotPlayable={setAllNotPlayable}
+              setNextTurn={setNextTurn}
             />
             <Console socket={socket} consoleOutput={consoleOutput} />
           </div>

@@ -20,6 +20,7 @@ export default function EmporionChoice({ cards, getEmporioCard, username, nextEm
                 const cardSource = require("../img/gfx/cards/" + card.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + ".png");
                 return (
                     <button 
+                        key={card.name + card.type + card.digit}
                         onClick={() => getEmporioCard(card)} 
                         style={emporioStyles}
                         className='w-[60px] xs:w-[80px] rounded-md'>
