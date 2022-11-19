@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Card({ socket, card, setActiveCard, setSelectPlayerTarget, setSelectCardTarget, currentRoom, username, currentPlayer, duelActive, indianiActive, discarding, character, 
-  onClick, predictUseCard, predictUseBlueCard, setAllNotPlayable, myHand, myHealth, setNextTurn, endTurn }) {
+  onClick, predictUseCard, predictUseBlueCard, setAllNotPlayable, myHand, myHealth, setIsLosingHealth, setNextTurn }) {
 
     const isPlayable = card.isPlayable
     const cardName = card.name;
@@ -35,6 +35,7 @@ export default function Card({ socket, card, setActiveCard, setSelectPlayerTarge
           socket.emit("play_bang_as_CJ", {username, currentRoom, cardDigit, cardType});
           predictUseCard(cardName, cardDigit, cardType);
           setAllNotPlayable();
+          setIsLosingHealth(false);
           
         } else if (!duelActive && !indianiActive) {
           setActiveCard(card);
@@ -69,6 +70,7 @@ export default function Card({ socket, card, setActiveCard, setSelectPlayerTarge
           socket.emit("play_mancato", {username, currentRoom, cardDigit, cardType});
           predictUseCard(cardName, cardDigit, cardType);
           setAllNotPlayable();
+          setIsLosingHealth(false);
         }
         
       } else if (cardName === "Beer") {

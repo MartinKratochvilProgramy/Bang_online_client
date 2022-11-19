@@ -138,8 +138,8 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
                   setAllNotPlayable={setAllNotPlayable}
                   myHand={myHand}
                   myHealth={myHealth}
+                  setIsLosingHealth={setIsLosingHealth}
                   setNextTurn={setNextTurn}
-                  endTurn={endTurn}
                   />
               )
           })}
