@@ -206,10 +206,16 @@ function App() {
     setCharacterUsable(false);
     if (character === "Kit Carlson") {
       setMyHand([...myHand, card]);
+
+      const newMyDrawChoice = myDrawChoice;
+      newMyDrawChoice.splice(myDrawChoice.findIndex(foundCard => (foundCard.name === card.name && foundCard.digit === card.digit && foundCard.type === card.type)))
+      setMyDrawChoice(newMyDrawChoice);
       
       socket.emit("get_choice_card_KC", {username, currentRoom, card});
     } else if (character === "Lucky Duke") {
       setMyHand([...myHand, card]);
+
+      setMyDrawChoice([null]);
       
       socket.emit("get_choice_card_LD", {username, currentRoom, card});
     }

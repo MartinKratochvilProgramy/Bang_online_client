@@ -179,6 +179,7 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
     const newMyHand = myHand;
     const cardIndex = myHand.findIndex(card => (card.name === cardName && card.digit === cardDigit && card.type === cardType));
     newMyHand.splice(cardIndex, 1);
+    
     setMyHand(newMyHand);
   }
 
