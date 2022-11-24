@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function Card({ socket, card, setActiveCard, setSelectPlayerTarget, setSelectCardTarget, currentRoom, username, currentPlayer, duelActive, indianiActive, discarding, character, 
+import {socket} from '../socket';
+
+export default function Card({ card, setActiveCard, setSelectPlayerTarget, setSelectCardTarget, currentRoom, username, currentPlayer, duelActive, indianiActive, discarding, character, 
   onClick, predictUseCard, predictUseBlueCard, setAllNotPlayable, myHand, myHealth, setIsLosingHealth, setNextTurn }) {
 
     const isPlayable = card.isPlayable

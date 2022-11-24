@@ -3,7 +3,9 @@ import UsernameSelect from './UsernameSelect';
 import RoomCreate from './RoomCreate';
 import RoomInfo from './RoomInfo';
 
-export default function RoomSelect({ setUsername, socket, setCurrentRoom, username, rooms, setAdmin }) {
+import {socket} from '../socket';
+
+export default function RoomSelect({ setUsername, setCurrentRoom, username, rooms, setAdmin }) {
 
     const createRoom = (roomName) => {
         // don't allow already existing room to be created

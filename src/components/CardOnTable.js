@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function CardOnTable({ socket, username, selectCardTarget, currentRoom, card, confirmCardTarget }) {
+import {socket} from '../socket';
+
+export default function CardOnTable({ username, selectCardTarget, currentRoom, card, confirmCardTarget }) {
 
       
     function playCardOnTable() {

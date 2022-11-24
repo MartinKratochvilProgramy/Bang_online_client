@@ -6,7 +6,9 @@ import Console from './Console';
 import StackDeck from './StackDeck';
 import CharacterChoice from './CharacterChoice';
 
-export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, socket, currentRoom, currentPlayer, playersLosingHealth, isLosingHealth, setIsLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
+import {socket} from '../socket';
+
+export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, currentRoom, currentPlayer, playersLosingHealth, isLosingHealth, setIsLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
   indianiActive, emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
   
   const [nextTurn, setNextTurn] = useState(true);
@@ -207,7 +209,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
           className='fixed flex flex-col items-center justify-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] m-auto space-y-4 xs:space-y-8'
           id="character-choice">
           <CharacterChoice 
-            socket={socket} 
             currentRoom={currentRoom}
             username={username} 
             character={character}
@@ -219,7 +220,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
         <>
           <div id='oponents' className='fixed z-[30]'>
           <Oponents
-            socket={socket}
             myHand={myHand}
             allPlayersInfo={allPlayersInfo}
             allCharactersInfo={allCharactersInfo}
@@ -241,7 +241,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
 
           <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] m-auto z-[40]'>
             <StackDeck 
-              socket={socket} 
               username={username} 
               currentRoom={currentRoom} 
               currentPlayer={currentPlayer}
@@ -254,7 +253,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
           <div className='fixed flex justify-between items-end bottom-0 left-0 right-0 z-[50]'>
             <Chat sendMessage={sendMessage} messages={messages} width={260} />
             <PlayerTable
-              socket={socket}
               myHand={myHand}
               setMyHand={setMyHand}
               setTopStackCard={setTopStackCard}
@@ -287,7 +285,7 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
               setAllNotPlayable={setAllNotPlayable}
               setNextTurn={setNextTurn}
             />
-            <Console socket={socket} consoleOutput={consoleOutput} />
+            <Console consoleOutput={consoleOutput} />
           </div>
         </>
       }

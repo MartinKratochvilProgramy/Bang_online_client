@@ -5,7 +5,9 @@ import getCharacterDescription from '../utils/getCharacterDescription';
 import getRoleDescription from '../utils/getRoleDescription';
 import CardOnTable from './CardOnTable';
 
-export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
+import {socket} from '../socket';
+
+export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
     indianiActive, discarding, character, role, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
     selectPlayerTarget, setDiscarding, setDeckActive, isLosingHealth, setIsLosingHealth, predictUseCard, predictUseBlueCard, setAllNotPlayable, setNextTurn}) {
 
@@ -65,7 +67,6 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
           return(
             <CardOnTable 
               key={card.name + card.digit + card.type}
-              socket={socket}
               username={username}
               currentRoom={currentRoom}
               card={card}
@@ -120,7 +121,6 @@ export default function PlayerTable({ socket, myHand, table, setSelectPlayerTarg
           {myHand.map(card => {
               return(
               <Card 
-                  socket={socket}
                   card={card}
                   key={card.name + card.digit + card.type}
                   setSelectPlayerTarget={setSelectPlayerTarget}

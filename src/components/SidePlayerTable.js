@@ -2,7 +2,7 @@ import React from 'react';
 import getCharacterDescription from '../utils/getCharacterDescription';
 import OponentCardOnTable from './OponentCardOnTable';
 
-export default function SidePlayerTable({ socket, cardsInHand, table, oponentName, currentRoom, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
+export default function SidePlayerTable({ cardsInHand, table, oponentName, currentRoom, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
      character, role, health, confirmCardTarget, playersInRange, confirmPlayerTarget, rotateDescription }) {
 
   const characterSource = require("../img/gfx/characters/" + character.replace(/\s/g, '') + ".png");
@@ -30,7 +30,6 @@ export default function SidePlayerTable({ socket, cardsInHand, table, oponentNam
         {table.map(card => {
           return(
             <OponentCardOnTable 
-              socket={socket}
               username={username}
               selectCardTarget={selectCardTarget && playersInRange.includes(oponentName)}
               confirmCardTarget={confirmCardTarget}

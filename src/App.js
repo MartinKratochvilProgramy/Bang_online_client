@@ -9,8 +9,6 @@ import DrawChoice from './components/DrawChoice';
 
 import {socket} from './socket'
 
-// SRC: https://github.com/machadop1407/socket-io-react-example
-
 function App() {
 
   const [myCharacterChoice, setMyCharacterChoice] = useState([]);
@@ -232,7 +230,6 @@ function App() {
           <RoomSelect 
             newRoomRef={newRoomRef} 
             setUsername={setUsername} 
-            socket={socket} 
             setCurrentRoom={setCurrentRoom} 
             username={username} 
             rooms={rooms} 
@@ -269,7 +266,6 @@ function App() {
             setCharacterUsable={setCharacterUsable}
             role={role}
             knownRoles={knownRoles}
-            socket={socket}
             currentRoom={currentRoom}
             setCurrentRoom={setCurrentRoom}
             currentPlayer={currentPlayer}

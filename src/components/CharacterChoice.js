@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function CharacterChoice({ socket, currentRoom, username, character, setCharacter, myCharacterChoice }) {
+import {socket} from '../socket';
+
+export default function CharacterChoice({ currentRoom, username, character, setCharacter, myCharacterChoice }) {
 
   function handleClick(card) {
     setCharacter(card);

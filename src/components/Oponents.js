@@ -5,7 +5,7 @@ import TopRightPlayerTable from './TopRightPlayerTable';
 import SidePlayerTable from './SidePlayerTable';
 import clamp from '../utils/clamp';
 
-export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, knownRoles, currentRoom, activateCharacter, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
+export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles, currentRoom, activateCharacter, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
     characterUsable, confirmCardTarget, playersInRange, confirmPlayerTarget}) {
         
     const playerIndex = allPlayersInfo.findIndex(player => {
@@ -26,7 +26,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
         return (
           <div className='w-[390px] xs:w-[560px] z-50 fixed left-[50%] translate-x-[-50%]'>
               <TopPlayerTable
-                socket={socket}
                 cardsInHand={new Array(oponentsInfo[0].numberOfCards).fill(0)}
                 table={oponentsInfo[0].table}
                 oponentName={oponentsInfo[0].name}
@@ -55,7 +54,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
             <div>
                 <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[248px] xs:top-[320px] rotate-90'>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name}
@@ -78,7 +76,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 <div className='fixed top-0 left-[50%] translate-x-[-50%] z-5'>
                     <div className='w-[420px] xs:w-[620px]'>                        
                     <TopPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name}
@@ -103,7 +100,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 </div>
                 <div className='fixed z-10 flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[248px] xs:top-[320px] rotate-[270deg]'>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name}
@@ -132,7 +128,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
             <div className=''>
                 <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[288px] xs:top-[348px] rotate-90 '>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name}
@@ -155,7 +150,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 <div className='fixed top-0 left-0 right-0 flex justify-center space-x-4 z-5'>
                     <div className='w-[420px] xs:w-[620px]'>                        
                     <TopPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name}
@@ -179,7 +173,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                     </div>
                     <div className='w-[420px] xs:w-[620px]'>                        
                      <TopPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name}
@@ -204,7 +197,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 </div>
                 <div className='fixed flex items-end justify-end w-[490px] right-[-182px] xs:right-[-158px] top-[288px] xs:top-[348px] rotate-[270deg]'>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name}
@@ -233,7 +225,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
             <div className=''>
                 <div className='fixed flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[294px] xs:top-[360px] rotate-90 '>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name}
@@ -256,7 +247,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 <div className='fixed top-0 left-0 right-0 flex justify-center space-x-2 z-5'>
                     <div className='w-[350px] xs:w-[620px] z-1'>                        
                     <TopLeftPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name}
@@ -280,7 +270,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                     </div>
                     <div className='w-[350px] xs:w-[620px] z-[10]'>                        
                      <TopPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name}
@@ -304,7 +293,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                     </div>
                     <div className='w-[350px] xs:w-[620px] z-[11]'>                        
                      <TopRightPlayerTable
-                            socket={socket}
                             cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                             table={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].table}
                             oponentName={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name}
@@ -329,7 +317,6 @@ export default function Oponents({ socket, allPlayersInfo, allCharactersInfo, kn
                 </div>
                 <div className='fixed flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[294px] xs:top-[360px] rotate-[270deg]'>
                     <SidePlayerTable
-                        socket={socket}
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 4, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 4, allPlayersInfo.length - 1)].table}
                         oponentName={oponentsInfo[clamp(playerIndex + 4, allPlayersInfo.length - 1)].name}

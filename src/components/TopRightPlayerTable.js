@@ -90,7 +90,6 @@ export default function TopLeftPlayerTable({ socket, cardsInHand, table, oponent
         {table.map(card => {
           return(
             <OponentCardOnTable 
-              socket={socket}
               username={username}
               selectCardTarget={selectCardTarget && playersInRange.includes(oponentName)}
               confirmCardTarget={confirmCardTarget}
