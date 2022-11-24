@@ -8,13 +8,20 @@ import CharacterChoice from './CharacterChoice';
 
 import {socket} from '../socket';
 
-export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, role, knownRoles, currentRoom, currentPlayer, playersLosingHealth, isLosingHealth, setIsLosingHealth, playersActionRequiredOnStart, topStackCard, setTopStackCard, duelActive, 
-  indianiActive, emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
+export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, knownRoles, currentRoom, 
+emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
   
   const [nextTurn, setNextTurn] = useState(true);
+  const [currentPlayer, setCurrentPlayer] = useState("");
+  const [playersLosingHealth, setPlayersLosingHealth] = useState([]);
+  const [playersActionRequiredOnStart, setPlayersActionRequiredOnStart] = useState([]);
+  const [isLosingHealth, setIsLosingHealth] = useState(false);
   const [activeCard, setActiveCard] = useState({});
   const [playersInRange, setPlayersInRange] = useState([]);
   const [myHealth, setMyHealth] = useState(null);
+  const [indianiActive, setIndianiActive] = useState(false);
+  const [duelActive, setDuelActive] = useState(false);
+  const [topStackCard, setTopStackCard] = useState(null);
 
   const [selectPlayerTarget, setSelectPlayerTarget] = useState(false);
   const [selectCardTarget, setSelectCardTarget] = useState(false);
@@ -58,6 +65,47 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
 
   socket.on("players_in_range", players => {
     setPlayersInRange(players);
+  })
+
+  
+  socket.off("current_player").on("current_player", playerName => {
+    if (username === "") return;
+    if (currentRoom === null) return;
+    setCurrentPlayer(playerName);
+    socket.emit("get_my_hand", {username, currentRoom});
+    console.log("current player");
+  })
+  
+  socket.on("update_players_losing_health", (players) => {
+    setPlayersLosingHealth(players);
+
+    let playerFound = false;
+    for (const player of players) {
+      if (player.name === username && player.isLosingHealth) {
+        playerFound = true;
+      }
+    }
+    if (playerFound) {
+      setIsLosingHealth(true)
+    } else {
+      setIsLosingHealth(false)
+    }
+  })
+  
+  socket.on("update_players_with_action_required", (players) => {
+    setPlayersActionRequiredOnStart(players);
+  })
+  
+  socket.on("indiani_active", (state) => {
+    setIndianiActive(state);
+  })
+  
+  socket.on("duel_active", (state) => {
+    setDuelActive(state);
+  })
+
+  socket.on("update_top_stack_card", (card) => {
+    setTopStackCard(card);
   })
 
   socket.on("update_draw_choices", (characterName) => {
@@ -268,7 +316,6 @@ export default function Game({ myCharacterChoice, characterChoiceInProgress, set
               indianiActive={indianiActive}
               discarding={discarding}
               character={character}
-              role={role}
               nextTurn={nextTurn}
               characterUsable={characterUsable}
               setCharacterUsable={setCharacterUsable}

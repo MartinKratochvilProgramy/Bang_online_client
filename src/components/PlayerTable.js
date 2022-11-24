@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 import Button from './Button';
 import getCharacterDescription from '../utils/getCharacterDescription';
@@ -8,8 +8,16 @@ import CardOnTable from './CardOnTable';
 import {socket} from '../socket';
 
 export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
-    indianiActive, discarding, character, role, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
+    indianiActive, discarding, character, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
     selectPlayerTarget, setDiscarding, setDeckActive, isLosingHealth, setIsLosingHealth, predictUseCard, predictUseBlueCard, setAllNotPlayable, setNextTurn}) {
+
+  const [role, setRole] = useState("");
+
+  
+  socket.off("my_role").on("my_role", role => {
+    console.log("my role: ", role); 
+    setRole(role);
+  })
 
   function cancelTargetSelect() {
     setSelectPlayerTarget(false);

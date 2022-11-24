@@ -21,7 +21,6 @@ function App() {
   const [username, setUsername] = useState(JSON.parse(sessionStorage.getItem('username')) || "");
   const [admin, setAdmin] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [role, setRole] = useState("");
   const [knownRoles, setKnownRoles] = useState({});
   const [character, setCharacter] = useState("");
   const [characterUsable, setCharacterUsable] = useState(false);
@@ -30,13 +29,6 @@ function App() {
   const [myDrawChoice, setMyDrawChoice] = useState([]);
   const [allPlayersInfo, setAllPlayersInfo] = useState([]);
   const [allCharactersInfo, setAllCharactersInfo] = useState([]);
-  const [playersLosingHealth, setPlayersLosingHealth] = useState([]);
-  const [isLosingHealth, setIsLosingHealth] = useState(false);
-  const [playersActionRequiredOnStart, setPlayersActionRequiredOnStart] = useState([]);
-  const [currentPlayer, setCurrentPlayer] = useState("");
-  const [topStackCard, setTopStackCard] = useState(null);
-  const [duelActive, setDuelActive] = useState(false);
-  const [indianiActive, setIndianiActive] = useState(false);
   const [emporioState, setEmporioState] = useState([]);
   const [nextEmporioTurn, setNextEmporioTurn] = useState("");
 
@@ -92,18 +84,6 @@ function App() {
       }
     })
 
-    socket.off("current_player").on("current_player", playerName => {
-      if (username === "") return;
-      if (currentRoom === null) return;
-      setCurrentPlayer(playerName);
-      socket.emit("get_my_hand", {username, currentRoom});
-    })
-
-    socket.off("my_role").on("my_role", role => {
-      // console.log("my role: ", role); 
-      setRole(role);
-    })
-
     socket.off("known_roles").on("known_roles", roles => {
       // console.log("known roles: ", roles); 
       setKnownRoles(roles);
@@ -124,41 +104,9 @@ function App() {
       socket.emit("get_my_hand", {username, currentRoom});
     })
 
-    socket.on("update_players_losing_health", (players) => {
-      setPlayersLosingHealth(players);
-
-      let playerFound = false;
-      for (const player of players) {
-        if (player.name === username && player.isLosingHealth) {
-          playerFound = true;
-        }
-      }
-      if (playerFound) {
-        setIsLosingHealth(true)
-      } else {
-        setIsLosingHealth(false)
-      }
-    })
-
-    socket.on("update_players_with_action_required", (players) => {
-      setPlayersActionRequiredOnStart(players);
-    })
-
     socket.on("update_all_players_info", (players) => {
       // returns array [{name, numberOfCards, health}]
       setAllPlayersInfo(players);
-    })
-
-    socket.on("update_top_stack_card", (card) => {
-      setTopStackCard(card);
-    })
-
-    socket.on("duel_active", (state) => {
-      setDuelActive(state);
-    })
-
-    socket.on("indiani_active", (state) => {
-      setIndianiActive(state);
     })
 
     socket.on("emporio_state", (state) => {
@@ -264,19 +212,9 @@ function App() {
             character={character}
             characterUsable={characterUsable}
             setCharacterUsable={setCharacterUsable}
-            role={role}
             knownRoles={knownRoles}
             currentRoom={currentRoom}
             setCurrentRoom={setCurrentRoom}
-            currentPlayer={currentPlayer}
-            isLosingHealth={isLosingHealth}
-            playersLosingHealth={playersLosingHealth}
-            setIsLosingHealth={setIsLosingHealth}
-            playersActionRequiredOnStart={playersActionRequiredOnStart}
-            topStackCard={topStackCard}
-            setTopStackCard={setTopStackCard}
-            duelActive={duelActive}
-            indianiActive={indianiActive}
             emporioState={emporioState}
             myDrawChoice={myDrawChoice}
             nextEmporioTurn={nextEmporioTurn}
