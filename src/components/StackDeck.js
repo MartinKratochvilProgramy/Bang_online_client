@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
-export default function StackDeck({ username, currentRoom, currentPlayer, topStackCard, deckActive, drawFromDeck}) {
+export default function StackDeck({ currentRoom, currentPlayer, topStackCard, deckActive, drawFromDeck}) {
+
   function handleClick() {
     if (!deckActive) return;
     drawFromDeck();
@@ -24,7 +25,6 @@ export default function StackDeck({ username, currentRoom, currentPlayer, topSta
               card={topStackCard}
               key={topStackCard.name + topStackCard.digit + topStackCard.type}
               currentRoom={currentRoom}
-              username={username}
               currentPlayer={currentPlayer}
           />       
         }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UsernameContext } from '../App';
 import Card from './Card';
 import Button from './Button';
 import getCharacterDescription from '../utils/getCharacterDescription';
@@ -7,12 +8,13 @@ import CardOnTable from './CardOnTable';
 
 import {socket} from '../socket';
 
-export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, username, currentPlayer, duelActive, 
+export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setSelectCardTarget, currentRoom, setActiveCard, activateCharacter, currentPlayer, duelActive, 
     indianiActive, discarding, character, nextTurn, characterUsable, setCharacterUsable, myDrawChoice, emporioState, myHealth,
     selectPlayerTarget, setDiscarding, setDeckActive, isLosingHealth, setIsLosingHealth, predictUseCard, predictUseBlueCard, setAllNotPlayable, setNextTurn}) {
 
-  const [role, setRole] = useState("");
+    const [username, ] = useContext(UsernameContext);
 
+    const [role, setRole] = useState("");
   
   socket.off("my_role").on("my_role", role => {
     console.log("my role: ", role); 
@@ -75,7 +77,6 @@ export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setS
           return(
             <CardOnTable 
               key={card.name + card.digit + card.type}
-              username={username}
               currentRoom={currentRoom}
               card={card}
             />
@@ -135,7 +136,6 @@ export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setS
                   setSelectCardTarget={setSelectCardTarget}
                   currentRoom={currentRoom}
                   setActiveCard={setActiveCard}
-                  username={username}
                   currentPlayer={currentPlayer}
                   duelActive={duelActive}
                   indianiActive={indianiActive}

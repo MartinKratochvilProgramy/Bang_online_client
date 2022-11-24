@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { UsernameContext } from '../App';
 
 import {socket} from '../socket';
 
-export default function Card({ card, setActiveCard, setSelectPlayerTarget, setSelectCardTarget, currentRoom, username, currentPlayer, duelActive, indianiActive, discarding, character, 
+export default function Card({ card, setActiveCard, setSelectPlayerTarget, setSelectCardTarget, currentRoom, currentPlayer, duelActive, indianiActive, discarding, character, 
   onClick, predictUseCard, predictUseBlueCard, setAllNotPlayable, myHand, myHealth, setIsLosingHealth, setNextTurn }) {
+
+    const [username, ] = useContext(UsernameContext);
 
     const isPlayable = card.isPlayable
     const cardName = card.name;

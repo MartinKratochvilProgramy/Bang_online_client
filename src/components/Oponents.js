@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UsernameContext } from '../App';
 import TopPlayerTable from './TopPlayerTable';
 import TopLeftPlayerTable from './TopLeftPlayerTable';
 import TopRightPlayerTable from './TopRightPlayerTable';
 import SidePlayerTable from './SidePlayerTable';
 import clamp from '../utils/clamp';
 
-export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles, currentRoom, activateCharacter, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
+export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles, currentRoom, activateCharacter, selectCardTarget, selectPlayerTarget, currentPlayer, 
     characterUsable, confirmCardTarget, playersInRange, confirmPlayerTarget}) {
+
+    const [username, ] = useContext(UsernameContext);
         
     const playerIndex = allPlayersInfo.findIndex(player => {
         // index of user player
@@ -35,7 +38,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                 selectPlayerTarget={selectPlayerTarget}
                 confirmCardTarget={confirmCardTarget}
                 currentPlayer={currentPlayer}
-                username={username}
                 character={charactersInfo[0].character}
                 characterUsable={characterUsable}
                 health={oponentsInfo[0].health}
@@ -63,7 +65,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}
@@ -85,7 +86,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -109,7 +109,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}
@@ -137,7 +136,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}
@@ -159,7 +157,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -182,7 +179,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -206,7 +202,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}
@@ -234,7 +229,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}
@@ -256,7 +250,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -279,7 +272,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -302,7 +294,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                             selectPlayerTarget={selectPlayerTarget}
                             confirmCardTarget={confirmCardTarget}
                             currentPlayer={currentPlayer}
-                            username={username}
                             character={charactersInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].character}
                             role={knownRoles[oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name]}
                             characterUsable={characterUsable}
@@ -326,7 +317,6 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         selectPlayerTarget={selectPlayerTarget}
                         confirmCardTarget={confirmCardTarget}
                         currentPlayer={currentPlayer}
-                        username={username}
                         character={charactersInfo[clamp(playerIndex + 4, allPlayersInfo.length - 1)].character}
                         role={knownRoles[oponentsInfo[clamp(playerIndex + 4, allPlayersInfo.length - 1)].name]}
                         characterUsable={characterUsable}

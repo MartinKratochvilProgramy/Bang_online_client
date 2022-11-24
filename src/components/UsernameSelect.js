@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UsernameContext } from '../App';
 import Button from './Button';
 
-export default function UsernameSelect({ setUsername }) {
+export default function UsernameSelect() {
+
+    const [, setUsername] = useContext(UsernameContext);
     
     const [usernameInput, setUsernameInput] = useState("");
 

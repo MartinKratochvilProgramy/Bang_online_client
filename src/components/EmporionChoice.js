@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { UsernameContext } from '../App';
 
-export default function EmporionChoice({ cards, getEmporioCard, username, nextEmporioTurn }) {
+export default function EmporionChoice({ cards, getEmporioCard, nextEmporioTurn }) {
+
+    const [username, ] = useContext(UsernameContext);
   
     let emporioStyles = {color: "black"};
     if (nextEmporioTurn === username) {

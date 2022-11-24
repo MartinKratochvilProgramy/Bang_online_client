@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PlayerTable from './PlayerTable';
 import Oponents from './Oponents';
 import Chat from './Chat';
 import Console from './Console';
 import StackDeck from './StackDeck';
 import CharacterChoice from './CharacterChoice';
+import { UsernameContext } from '../App';
 
 import {socket} from '../socket';
 
-export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, username, character, characterUsable, setCharacterUsable, knownRoles, currentRoom, 
+export default function Game({ myCharacterChoice, characterChoiceInProgress, setCharacter, myHand, setMyHand, allPlayersInfo, allCharactersInfo, character, characterUsable, setCharacterUsable, knownRoles, currentRoom, 
 emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) { 
+
+  const [username, ] = useContext(UsernameContext);
   
   const [nextTurn, setNextTurn] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState("");
@@ -258,7 +261,6 @@ emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) {
           id="character-choice">
           <CharacterChoice 
             currentRoom={currentRoom}
-            username={username} 
             character={character}
             setCharacter={setCharacter} 
             myCharacterChoice={myCharacterChoice} /> 
@@ -274,7 +276,6 @@ emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) {
             knownRoles={knownRoles}
             currentRoom={currentRoom}
             activateCharacter={activateCharacter}
-            username={username}
             selectCardTarget={selectCardTarget}
             confirmCardTarget={confirmCardTarget}
             selectPlayerTarget={selectPlayerTarget}
@@ -289,7 +290,6 @@ emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) {
 
           <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] m-auto z-[40]'>
             <StackDeck 
-              username={username} 
               currentRoom={currentRoom} 
               currentPlayer={currentPlayer}
               topStackCard={topStackCard}
@@ -310,7 +310,6 @@ emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) {
               currentRoom={currentRoom}
               setActiveCard={setActiveCard}
               activateCharacter={activateCharacter}
-              username={username}
               currentPlayer={currentPlayer}
               duelActive={duelActive}
               indianiActive={indianiActive}

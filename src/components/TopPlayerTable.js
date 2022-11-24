@@ -2,9 +2,8 @@ import React from 'react';
 import getCharacterDescription from '../utils/getCharacterDescription';
 import OponentCardOnTable from './OponentCardOnTable';
 
-export default function TopPlayerTable({ cardsInHand, table, oponentName, currentRoom, selectCardTarget, selectPlayerTarget, username, currentPlayer, 
+export default function TopPlayerTable({ cardsInHand, table, oponentName, currentRoom, selectCardTarget, selectPlayerTarget, currentPlayer, 
      character, role, health, confirmCardTarget, playersInRange, confirmPlayerTarget, largeMagicConstant, smallMagicConstant, cardClampLimit }) {
-
 
   const characterSource = require("../img/gfx/characters/" + character.replace(/\s/g, '') + ".png");
 
@@ -90,7 +89,6 @@ export default function TopPlayerTable({ cardsInHand, table, oponentName, curren
         {table.map(card => {
           return(
             <OponentCardOnTable 
-              username={username}
               selectCardTarget={selectCardTarget && playersInRange.includes(oponentName)}
               confirmCardTarget={confirmCardTarget}
               currentRoom={currentRoom}

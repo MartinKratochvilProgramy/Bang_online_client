@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import RoomSelect from "./components/RoomSelect";
 import Room from "./components/Room";
 import Game from "./components/Game";
@@ -9,7 +9,10 @@ import DrawChoice from './components/DrawChoice';
 
 import {socket} from './socket'
 
+export const UsernameContext = React.createContext();
+
 function App() {
+  const [username, setUsername] = useState(JSON.parse(sessionStorage.getItem('username')) || "");
 
   const [myCharacterChoice, setMyCharacterChoice] = useState([]);
   const [characterChoiceInProgress, setCharacterChoiceInProgress] = useState(true);
@@ -18,7 +21,6 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [rooms, setRooms] = useState([]);
-  const [username, setUsername] = useState(JSON.parse(sessionStorage.getItem('username')) || "");
   const [admin, setAdmin] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [knownRoles, setKnownRoles] = useState({});
@@ -169,71 +171,70 @@ function App() {
 
   return (
     <div className="App flex flex-col justify-start items-center h-screen">
-      {currentRoom === null ? 
-        <>
-          <img className="w-[300px] xs:w-max mt-2 xs:mt-12" src={require('./img/bang-logo.png')} alt="Bang! logo" />
-          <a href="/about" className="text-gray-800 hover:text-black text-2xl underline font-rye">
-              About
-          </a>
-          <RoomSelect 
-            newRoomRef={newRoomRef} 
-            setUsername={setUsername} 
-            setCurrentRoom={setCurrentRoom} 
-            username={username} 
-            rooms={rooms} 
-            setAdmin={setAdmin}
-          />
-        </>
-      :
-      !gameStarted &&
-        <Room 
-          users={users} 
-          messages={messages} 
-          roomName={currentRoom} 
-          leaveRoom={leaveRoom} 
-          sendMessage={sendMessage}
-          startGame={startGame}
-          gameStarted={gameStarted}
-          admin={admin}
-          />
-      }
-      {gameStarted && 
-        <>
-          <Game 
-            myCharacterChoice={myCharacterChoice}
-            characterChoiceInProgress={characterChoiceInProgress}
-            setCharacter={setCharacter}
-            myHand={myHand}
-            setMyHand={setMyHand}
-            allPlayersInfo={allPlayersInfo}
-            setAllPlayersInfo={setAllPlayersInfo}
-            allCharactersInfo={allCharactersInfo}
-            username={username}
-            character={character}
-            characterUsable={characterUsable}
-            setCharacterUsable={setCharacterUsable}
-            knownRoles={knownRoles}
-            currentRoom={currentRoom}
-            setCurrentRoom={setCurrentRoom}
-            emporioState={emporioState}
-            myDrawChoice={myDrawChoice}
-            nextEmporioTurn={nextEmporioTurn}
+      <UsernameContext.Provider value={username}>
+        {currentRoom === null ? 
+          <>
+            <img className="w-[300px] xs:w-max mt-2 xs:mt-12" src={require('./img/bang-logo.png')} alt="Bang! logo" />
+            <a href="/about" className="text-gray-800 hover:text-black text-2xl underline font-rye">
+                About
+            </a>
+            <RoomSelect 
+              newRoomRef={newRoomRef} 
+              setCurrentRoom={setCurrentRoom} 
+              rooms={rooms} 
+              setAdmin={setAdmin}
+            />
+          </>
+        :
+        !gameStarted &&
+          <Room 
+            users={users} 
+            messages={messages} 
+            roomName={currentRoom} 
+            leaveRoom={leaveRoom} 
             sendMessage={sendMessage}
-            messages={messages}
-            consoleOutput={consoleOutput}
-          />
-          <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1100] m-auto'>
-              {winner && <GameEnd winner={winner} setCurrentRoom={setCurrentRoom} />}
-          </div>
-          <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1000] m-auto'>
-              {myDrawChoice.length > 0 && <DrawChoice cards={myDrawChoice} getChoiceCard={getChoiceCard} />}
-          </div>
-          <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1000] m-auto'>
-              {emporioState.length > 0 && <EmporionChoice cards={emporioState} getEmporioCard={getEmporioCard} username={username} nextEmporioTurn={nextEmporioTurn} />}
-          </div>
+            startGame={startGame}
+            gameStarted={gameStarted}
+            admin={admin}
+            />
+        }
+        {gameStarted && 
+          <>
+            <Game 
+              myCharacterChoice={myCharacterChoice}
+              characterChoiceInProgress={characterChoiceInProgress}
+              setCharacter={setCharacter}
+              myHand={myHand}
+              setMyHand={setMyHand}
+              allPlayersInfo={allPlayersInfo}
+              setAllPlayersInfo={setAllPlayersInfo}
+              allCharactersInfo={allCharactersInfo}
+              character={character}
+              characterUsable={characterUsable}
+              setCharacterUsable={setCharacterUsable}
+              knownRoles={knownRoles}
+              currentRoom={currentRoom}
+              setCurrentRoom={setCurrentRoom}
+              emporioState={emporioState}
+              myDrawChoice={myDrawChoice}
+              nextEmporioTurn={nextEmporioTurn}
+              sendMessage={sendMessage}
+              messages={messages}
+              consoleOutput={consoleOutput}
+            />
+            <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1100] m-auto'>
+                {winner && <GameEnd winner={winner} setCurrentRoom={setCurrentRoom} />}
+            </div>
+            <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1000] m-auto'>
+                {myDrawChoice.length > 0 && <DrawChoice cards={myDrawChoice} getChoiceCard={getChoiceCard} />}
+            </div>
+            <div className='fixed flex justify-center items-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-[1000] m-auto'>
+                {emporioState.length > 0 && <EmporionChoice cards={emporioState} getEmporioCard={getEmporioCard} nextEmporioTurn={nextEmporioTurn} />}
+            </div>
+          </>
+        }
 
-        </>
-      }
+      </UsernameContext.Provider>
     </div>
   );
 }

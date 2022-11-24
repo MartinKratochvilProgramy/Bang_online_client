@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UsernameContext } from '../App';
 
 import {socket} from '../socket';
 
-export default function CharacterChoice({ currentRoom, username, character, setCharacter, myCharacterChoice }) {
+export default function CharacterChoice({ currentRoom, character, setCharacter, myCharacterChoice }) {
+
+  const [username, ] = useContext(UsernameContext);
 
   function handleClick(card) {
     setCharacter(card);

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UsernameSelect from './UsernameSelect';
 import RoomCreate from './RoomCreate';
 import RoomInfo from './RoomInfo';
+import { UsernameContext } from '../App';
 
 import {socket} from '../socket';
 
-export default function RoomSelect({ setUsername, setCurrentRoom, username, rooms, setAdmin }) {
+export default function RoomSelect({ setCurrentRoom, rooms, setAdmin }) {
+
+    const [username, ] = useContext(UsernameContext);
 
     const createRoom = (roomName) => {
         // don't allow already existing room to be created
@@ -33,7 +36,7 @@ export default function RoomSelect({ setUsername, setCurrentRoom, username, room
 
     if (username === "") {
         return(
-            <UsernameSelect setUsername={setUsername} />
+            <UsernameSelect />
             )
     } else {
         return (
