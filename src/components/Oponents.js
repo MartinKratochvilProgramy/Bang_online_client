@@ -52,7 +52,7 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
     if (oponentsInfo.length === 3) {
         return (
             <div>
-                <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[248px] xs:top-[320px] rotate-90'>
+                <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[348px] xs:top-[320px] rotate-90'>
                     <SidePlayerTable
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].table}
@@ -98,7 +98,7 @@ export default function Oponents({ allPlayersInfo, allCharactersInfo, knownRoles
                         />
                     </div>
                 </div>
-                <div className='fixed z-10 flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[248px] xs:top-[320px] rotate-[270deg]'>
+                <div className='fixed z-10 flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[348px] xs:top-[320px] rotate-[270deg]'>
                     <SidePlayerTable
                         cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
                         table={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].table}
