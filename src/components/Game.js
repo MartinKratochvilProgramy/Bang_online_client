@@ -73,7 +73,6 @@ emporioState, myDrawChoice, sendMessage, messages, consoleOutput }) {
     if (currentRoom === null) return;
     setCurrentPlayer(playerName);
     socket.emit("get_my_hand", {username, currentRoom});
-    console.log("current player");
   })
   
   socket.on("update_players_losing_health", (players) => {
