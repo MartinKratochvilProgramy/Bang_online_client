@@ -15,7 +15,6 @@ export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setS
 
   
   socket.off("my_role").on("my_role", role => {
-    console.log("my role: ", role); 
     setRole(role);
   })
 
