@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import './Button.css';
 
 export default function UsernameSelect({ setUsername }) {
     
     const [usernameInput, setUsernameInput] = useState("");
 
-    function handleClick() {
+    function handleSubmit() {
         sessionStorage.setItem('username', JSON.stringify(usernameInput));
         setUsername(usernameInput);
         setUsernameInput("");
     }
 
   return (
-    <div className='mt-4 xs:mt-24'>
+    <form 
+        onSubmit={() => handleSubmit()}
+        className='mt-4 xs:mt-24'>
         <label className="text-outline font-rye text-6xl text-white mb-6">
             Select username 
         </label>
@@ -28,11 +31,12 @@ export default function UsernameSelect({ setUsername }) {
                 value={usernameInput}
             />
             <Button 
-                onClick={handleClick}
-                value={"Set Username"} 
+                onClick={null}
+                value={"Set username"} 
                 size={2}
             />
+                
         </div>
-    </div>
+    </form>
   )
 }
