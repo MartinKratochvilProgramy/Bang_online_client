@@ -84,13 +84,12 @@ function App() {
       }
     })
 
-    socket.off("known_roles").on("known_roles", roles => {
+    socket.on("known_roles", roles => {
       // console.log("known roles: ", roles); 
       setKnownRoles(roles);
     })
 
-    socket.off("my_hand").on("my_hand", hand => {
-      // console.log("my hand: ", hand); 
+    socket.on("my_hand", hand => {
       setMyHand(hand);
     })
 
@@ -98,7 +97,7 @@ function App() {
       setMyDrawChoice(hand);
     })
 
-    socket.off("update_hands").on("update_hands", () => {
+    socket.on("update_hands", () => {
       if (username === "") return;
       if (currentRoom === null) return;
       socket.emit("get_my_hand", {username, currentRoom});
@@ -118,7 +117,25 @@ function App() {
       setWinner(winner);
     })
 
-  }, [username, currentRoom, character, consoleOutput])
+    return () => {
+      socket.off("username_changed");
+      socket.off("get_character_choices");
+      socket.off("rooms");
+      socket.off("get_players");
+      socket.off("get_messages");
+      socket.off("console");
+      socket.off("game_started");
+      socket.off("characters");
+      socket.off("known_roles");
+      socket.off("my_hand");
+      socket.off("my_draw_choice");
+      socket.off("update_hands");
+      socket.off("update_all_players_info");
+      socket.off("emporio_state");
+      socket.off("game_ended");
+    }
+
+  }, [consoleOutput, currentRoom, username])
 
   const leaveRoom = () => {
     socket.emit("leave_room", {username, currentRoom});

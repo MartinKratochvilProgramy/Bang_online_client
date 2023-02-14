@@ -12,7 +12,9 @@ export default function RoomCreate({ createRoom }) {
     }
 
     return (
-    <div className='mt-8'>
+    <form 
+        onSubmit={handleClick}
+        className='mt-8'>
         <label className="text-outline font-rye text-5xl text-white my-6">
             Create new room
         </label>
@@ -29,6 +31,7 @@ export default function RoomCreate({ createRoom }) {
             value={"Create new room"} 
             size={2}
         />
-    </div>
+    </form>
+        
   )
 }

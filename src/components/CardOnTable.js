@@ -11,13 +11,13 @@ export default function CardOnTable({ username, selectCardTarget, currentRoom, c
         }
         if (!card.isPlayable) return;
         if (card.name === "Barilo") {
-        socket.emit("use_barel", {username, currentRoom});
+          socket.emit("use_barel", {username, currentRoom});
         }
         if (card.name === "Dynamite") {
-        socket.emit("use_dynamite", {username, currentRoom, card});
+          socket.emit("use_dynamite", {username, currentRoom, card});
         }
         if (card.name === "Prigione") {
-        socket.emit("use_prigione", {username, currentRoom, card});
+          socket.emit("use_prigione", {username, currentRoom, card});
         }
     }
 
@@ -27,7 +27,7 @@ export default function CardOnTable({ username, selectCardTarget, currentRoom, c
     } 
 
 
-const cardSource = require("../img/gfx/cards/" + card.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + ".png");
+  const cardSource = require("../img/gfx/cards/" + card.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + ".png");
 
   return (
     <button 

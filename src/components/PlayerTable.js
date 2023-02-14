@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import Button from './Button';
 import getCharacterDescription from '../utils/getCharacterDescription';
@@ -13,10 +13,16 @@ export default function PlayerTable({ myHand, table, setSelectPlayerTarget, setS
 
   const [role, setRole] = useState("");
 
+  useEffect(() => {
+    
+    socket.on("my_role", role => {
+      setRole(role);
+    })
   
-  socket.off("my_role").on("my_role", role => {
-    setRole(role);
-  })
+    return () => {
+      socket.off("my_role")
+    }
+  }, []);
 
   function cancelTargetSelect() {
     setSelectPlayerTarget(false);
