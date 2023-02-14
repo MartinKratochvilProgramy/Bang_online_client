@@ -5,7 +5,7 @@ export default function RoomCreate({ createRoom }) {
   
     const [roomInput, setRoomInput] = useState("");
     
-    function handleClick() {
+    function handleSubmit() {
         if (roomInput === "") return;
         createRoom(roomInput);
         setRoomInput("");
@@ -13,7 +13,7 @@ export default function RoomCreate({ createRoom }) {
 
     return (
     <form 
-        onSubmit={handleClick}
+        onSubmit={handleSubmit}
         className='mt-8'>
         <label className="text-outline font-rye text-5xl text-white my-6">
             Create new room
@@ -27,7 +27,7 @@ export default function RoomCreate({ createRoom }) {
             value={roomInput}
         />
         <Button 
-            onClick={handleClick}
+            onClick={handleSubmit}
             value={"Create new room"} 
             size={2}
         />
