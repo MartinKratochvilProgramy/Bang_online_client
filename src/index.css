@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   background-image: url("./img/wood-bg.jpg");
   margin: 0;
