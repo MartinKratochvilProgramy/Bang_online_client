@@ -28,8 +28,6 @@ export const DrawChoice = () => {
     if (character === 'Kit Carlson') {
       const newMyDrawChoice = [...myDrawChoice]
       newMyDrawChoice.splice(myDrawChoice.findIndex((foundCard: CardI) => (foundCard.name === card.name && foundCard.digit === card.digit && foundCard.type === card.type)))
-      console.log(newMyDrawChoice)
-
       dispatch(setMyDrawChoice(newMyDrawChoice))
 
       socket.emit('get_choice_card_KC', { username, currentRoom, card })

@@ -58,8 +58,6 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
 
   useEffect(() => {
     socket.on('my_role', (role: string) => {
-      console.log(role)
-
       setRole(role)
     })
 
@@ -226,7 +224,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
         <div className='flex flex-col justify-start h-full w-[120px] px-1 py-0 space-y-2'>
           {(currentPlayer === username && nextTurn && !characterUsable && emporioState.length === 0 && !(myDrawChoice.length > 0)) && <Button onClick={endTurn} value={'End turn'} size={1.2} />}
           {(selectPlayerTarget && nextTurn && currentPlayer === username) && <Button onClick={cancelTargetSelect} value={'Cancel'} size={1.2} /> }
-          {discarding && <Button onClick={() => { dispatch(setDiscardingFalse()); console.log('setDis') }} value={'Cancel'} size={1.2} />}
+          {discarding && <Button onClick={() => { dispatch(setDiscardingFalse()) }} value={'Cancel'} size={1.2} />}
           {isLosingHealth && <Button onClick={loseHealth} value={'Lose health'} size={1.2} />}
 
         </div>

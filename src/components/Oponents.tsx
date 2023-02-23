@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectActiveCard, setActiveCard } from '../features/activeCardSlice'
 import { type CharacterInfo, selectAllCharactersInfo } from '../features/allCharactersInfoSlice'
@@ -36,10 +36,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
 
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    console.log('Opponents')
-  }, [])
-
   const playerIndex = allPlayersInfo.findIndex((player: PlayerInfo) => {
     // index of user player
     return (player.name === username)
@@ -55,8 +51,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
   })
 
   function confirmPlayerTarget (target: string) {
-    console.log('selectPlayerTarget ', selectPlayerTarget)
-
     if (!selectPlayerTarget) return
 
     if (activeCard === null && character === 'Jesse Jones') {
@@ -116,10 +110,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
       </div>
     )
   } else if (oponentsInfo.length === 3) {
-    console.log('oponentsInfo ', oponentsInfo)
-    console.log('charactersInfo ', charactersInfo)
-    console.log('knownRoles ', knownRoles)
-
     return (
       <div>
         <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[348px] xs:top-[320px] rotate-90'>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useAppSelector } from '../app/hooks'
 import { selectCurrentPlayer } from '../features/currentPlayerSlice'
 import { selectPlayersInRange } from '../features/playersInRangeSlice'
@@ -23,17 +23,6 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const playersInRange = useAppSelector(selectPlayersInRange)
   const selectPlayerTarget = useAppSelector(selectSelectPlayerTarget)
-
-  useEffect(() => {
-    console.log(':::::::::::')
-    // console.log('role ', role)
-    console.log('oponentName ', oponentName)
-    // console.log('health ', health)
-    // console.log('character ', character)
-    // console.log('table ', table)
-    // console.log('rotateDescription ', rotateDescription)
-    // console.log('cardsInHand ', cardsInHand)
-  }, [])
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const characterSource = require(`../img/gfx/characters/${character.replace(/\s/g, '')}.png`)

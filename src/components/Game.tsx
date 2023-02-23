@@ -84,7 +84,6 @@ export const Game = () => {
 
   useEffect(() => {
     socket.on('known_roles', (roles: KnownRoles) => {
-      console.log('known roles: ', roles)
       dispatch(setKnownRoles(roles))
     })
 
@@ -94,7 +93,6 @@ export const Game = () => {
 
     socket.on('players_in_range', (players: string[]) => {
       dispatch(setPlayersInRange(players))
-      console.log('Players in range')
     })
 
     socket.on('current_player', (playerName: string) => {
@@ -145,8 +143,6 @@ export const Game = () => {
     })
 
     socket.on('jourdonnais_can_use_barel', () => {
-      console.log('Jourdy ', character)
-
       if (character === 'Jourdonnais') {
         dispatch(setCharacterUsableTrue())
       }

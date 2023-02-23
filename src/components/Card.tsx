@@ -86,8 +86,6 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
       }
     } else if (cardName === 'Mancato!') {
       if (username === currentPlayer && !duelActive && character === 'Calamity Janet') {
-        console.log('we are here')
-
         dispatch(setActiveCard(card))
         dispatch(setSelectPlayerTargetTrue())
         socket.emit('request_players_in_range', { range: 1, currentRoom, username })
