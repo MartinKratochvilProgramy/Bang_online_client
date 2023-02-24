@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect } from 'react'
-import { selectUsername } from './features/usernameSlice'
+import { selectUsername, setUsername } from './features/usernameSlice'
 import { selectCurrentRoom } from './features/currentRoomSlice'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { selectGameStarted, setGameStartedTrue } from './features/gameStartedSlice'
@@ -36,9 +36,9 @@ function App () {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-  //   socket.on('username_changed', (username) => {
-  //     setUsername(username)
-  //   })
+    socket.on('username_changed', (username) => {
+      dispatch(setUsername(username))
+    })
 
     socket.on('get_character_choices', (characters) => {
       // receive two characters to pick from
@@ -62,7 +62,6 @@ function App () {
       // setGameStarted(true) ???
       if (currentRoom !== null) {
         socket.emit('get_my_role', { username, currentRoom })
-        socket.emit('get_my_hand', { username, currentRoom })
       }
       dispatch(setAllPlayersInfo(data.allPlayersInfo)) // info about health, hands...
       dispatch(setAllCharactersInfo(data.allCharactersInfo)) // info about character names
@@ -81,12 +80,6 @@ function App () {
       dispatch(setMyDrawChoice(hand))
     })
 
-    socket.on('update_hands', () => {
-      if (username === '') return
-      if (currentRoom === null) return
-      socket.emit('get_my_hand', { username, currentRoom })
-    })
-
     socket.on('update_all_players_info', (players) => {
       // returns array [{name, numberOfCards, health}]
       dispatch(setAllPlayersInfo(players))
@@ -102,14 +95,13 @@ function App () {
     })
 
     return () => {
-      //     socket.off('username_changed')
+      socket.off('username_changed')
       socket.off('get_character_choices')
       socket.off('rooms')
       socket.off('get_players')
       socket.off('game_started')
       socket.off('characters')
       socket.off('my_draw_choice')
-      socket.off('update_hands')
       socket.off('update_all_players_info')
       socket.off('emporio_state')
       //     socket.off('game_ended')
