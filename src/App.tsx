@@ -123,8 +123,21 @@ function App () {
       dispatch(setAllPlayersInfo(newAllPlayersInfo))
     })
 
+    socket.on('update_number_of_cards', (handSizeInfo) => {
+      const newAllPlayersInfo: PlayerInfo[] = allPlayersInfo.map(playerInfo => {
+        if (playerInfo.name === handSizeInfo.username) {
+          return { ...playerInfo, numberOfCards: handSizeInfo.handSize }
+        } else {
+          return playerInfo
+        }
+      })
+
+      dispatch(setAllPlayersInfo(newAllPlayersInfo))
+    })
+
     return () => {
       socket.off('update_health')
+      socket.off('update_number_of_cards')
     }
   }, [allPlayersInfo])
 
