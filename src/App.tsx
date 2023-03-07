@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from './app/hooks'
 import { selectGameStarted, setGameStartedTrue } from './features/gameStartedSlice'
 import { setPlayerCharacterChoice } from './features/playerCharacterChoice'
 import { setCharacterChoiceInProgressTrue, setCharacterChoiceInProgressFalse } from './features/characterChoiceInProgressSlice'
-import { setAllPlayersInfo } from './features/allPlayersInfoSlice'
+import { setAllPlayersInfo, selectAllPlayersInfo } from './features/allPlayersInfoSlice'
 import { setAllCharactersInfo } from './features/allCharactersInfoSlice'
 import { selectMyDrawChoice, setMyDrawChoice } from './features/myDrawChoice'
 import { setCharacter } from './features/characterSlice'
@@ -19,6 +19,7 @@ import { Room } from './components/Room'
 import { Game } from './components/Game'
 import { setPlayers } from './features/playersSlice'
 import { selectWinner, setWinner } from './features/winnerSlice'
+import { type PlayerInfo } from './features/allPlayersInfoSlice'
 
 import { socket } from './socket'
 import { GameEnd } from './components/GameEnd'
@@ -32,6 +33,7 @@ function App () {
   const winner = useAppSelector(selectWinner)
   const myDrawChoice = useAppSelector(selectMyDrawChoice)
   const emporioState = useAppSelector(selectEmporioState)
+  const allPlayersInfo = useAppSelector(selectAllPlayersInfo)
 
   const dispatch = useAppDispatch()
 
@@ -107,7 +109,24 @@ function App () {
       //     socket.off('game_ended')
     }
   }, [currentRoom, username])
-  // }, [consoleOutput, currentRoom, username])
+
+  useEffect(() => {
+    socket.on('update_health', (playerHealthInfo) => {
+      const newAllPlayersInfo: PlayerInfo[] = allPlayersInfo.map(playerInfo => {
+        if (playerInfo.name === playerHealthInfo.username) {
+          return { ...playerInfo, health: playerHealthInfo.health }
+        } else {
+          return playerInfo
+        }
+      })
+
+      dispatch(setAllPlayersInfo(newAllPlayersInfo))
+    })
+
+    return () => {
+      socket.off('update_health')
+    }
+  }, [allPlayersInfo])
 
   return (
     <div className="App flex flex-col justify-start items-center h-screen">
