@@ -16,6 +16,7 @@ import { selectUsername } from '../features/usernameSlice'
 import clamp from '../utils/clamp'
 
 import { socket } from '../socket'
+import { setSelectCardTargetFalse } from '../features/selectCardTargetSlice'
 
 interface Props {
   predictUseCard: (cardName: string, cardDigit: number, cardType: string) => void
@@ -62,6 +63,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
 
     if (activeCard !== null) {
       dispatch(setSelectPlayerTargetFalse())
+
       const cardName = activeCard.name
       const cardDigit = activeCard.digit
       const cardType = activeCard.type
@@ -76,8 +78,10 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
         socket.emit('play_duel', { target, currentRoom, cardDigit, cardType })
         dispatch(setNextTurnFalse())
       } else if (cardName === 'Cat Balou') {
+        dispatch(setSelectCardTargetFalse())
         socket.emit('play_cat_ballou', { target, currentRoom, cardDigit, cardType })
       } else if (cardName === 'Panico') {
+        dispatch(setSelectCardTargetFalse())
         socket.emit('play_panico', { target, currentRoom, cardDigit, cardType })
       } else if (cardName === 'Prigione') {
         socket.emit('play_prigione', { username, target, currentRoom, activeCard })
