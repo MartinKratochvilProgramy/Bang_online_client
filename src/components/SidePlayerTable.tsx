@@ -5,6 +5,7 @@ import { selectPlayersInRange } from '../features/playersInRangeSlice'
 import { selectSelectPlayerTarget } from '../features/selectPlayerTargetSlice'
 import { type CardI } from '../types/card'
 import getCharacterDescription from '../utils/getCharacterDescription'
+import { CardsInHand } from './CardsInHand'
 import { OponentCardOnTable } from './OponentCardOnTable'
 
 interface Props {
@@ -92,33 +93,7 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
           </img>
         </div>
 
-        <div id='cards' className='max-h-full w-full flex justify-center'>
-          <div className='max-h-full w-[272px] flex relative'>
-            {cardsInHand.map((card, index) => {
-              let translate = 0
-              let magicConstant = 72
-              let cardWidth = 60
-              let cardClamp = 3 // how many cards in hand before it gets squished
-              const cardsElement = document.getElementById('cards')
-              if (cardsElement !== null) {
-                cardsElement.offsetWidth > 260 ? magicConstant = 300 : magicConstant = 110
-                cardsElement.offsetWidth > 260 ? cardWidth = 90 : cardWidth = 60
-                cardsElement.offsetWidth > 260 ? cardClamp = 4 : cardClamp = 3
-              }
-              if (cardsInHand.length >= cardClamp) {
-                translate = -((cardsInHand.length) * cardWidth - magicConstant) / (cardsInHand.length - 1) * index
-              }
-              return (
-              // unknown card
-                <img
-                  key={index}
-                  style={{ transform: `translate(${translate}px, 0)` }}
-                  className='w-[60px] xs:w-[80px] translate-x-[-40px]'
-                  src={require('../img/gfx/cards/back-playing.png')} alt="" />
-              )
-            })}
-          </div>
-        </div>
+        <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
       </div>
     </div>
   )

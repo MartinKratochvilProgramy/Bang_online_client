@@ -101,9 +101,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
           character={charactersInfo[0].character}
           table={oponentsInfo[0].table}
           cardsInHand={new Array(oponentsInfo[0].numberOfCards).fill(0)}
-          largeMagicConstant={352}
-          smallMagicConstant={222}
-          cardClampLimit={4}
           confirmCardTarget={confirmCardTarget}
           confirmPlayerTarget={confirmPlayerTarget}
         />
@@ -134,11 +131,8 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               table={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].table}
               cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
               role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
-              largeMagicConstant={352}
-              smallMagicConstant={222}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              cardClampLimit={4}
             />
           </div>
         </div>
@@ -184,9 +178,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              largeMagicConstant={402}
-              smallMagicConstant={238}
-              cardClampLimit={5}
             />
           </div>
           <div className='w-[420px] xs:w-[620px]'>
@@ -199,9 +190,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               role={knownRoles[oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name]}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              largeMagicConstant={402}
-              smallMagicConstant={238}
-              cardClampLimit={5}
             />
           </div>
         </div>
@@ -247,9 +235,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              largeMagicConstant={362}
-              smallMagicConstant={152}
-              cardClampLimit={4}
             />
           </div>
           <div className='w-[350px] xs:w-[620px] z-[10]'>
@@ -262,9 +247,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              largeMagicConstant={362}
-              smallMagicConstant={152}
-              cardClampLimit={4}
             />
           </div>
           <div className='w-[350px] xs:w-[620px] z-[11]'>
@@ -277,9 +259,6 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
               cardsInHand={new Array(oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].numberOfCards).fill(0)}
               confirmCardTarget={confirmCardTarget}
               confirmPlayerTarget={confirmPlayerTarget}
-              largeMagicConstant={362}
-              smallMagicConstant={152}
-              cardClampLimit={4}
             />
           </div>
         </div>

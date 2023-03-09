@@ -5,6 +5,7 @@ import { selectPlayersInRange } from '../features/playersInRangeSlice'
 import { selectSelectPlayerTarget } from '../features/selectPlayerTargetSlice'
 import { type CardI } from '../types/card'
 import getCharacterDescription from '../utils/getCharacterDescription'
+import { CardsInHand } from './CardsInHand'
 import { OponentCardOnTable } from './OponentCardOnTable'
 
 interface Props {
@@ -13,9 +14,6 @@ interface Props {
   character: string
   table: CardI[]
   cardsInHand: number[]
-  largeMagicConstant: number
-  smallMagicConstant: number
-  cardClampLimit: number
   confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
   confirmPlayerTarget: (target: string) => void
   role?: string
@@ -27,9 +25,6 @@ export const TopLeftPlayerTable: React.FC<Props> = ({
   character,
   table,
   cardsInHand,
-  largeMagicConstant,
-  smallMagicConstant,
-  cardClampLimit,
   confirmCardTarget,
   confirmPlayerTarget,
   role
@@ -86,37 +81,14 @@ export const TopLeftPlayerTable: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className='flex justify-start xs:justify-center w-auto min-w-[90px] group'>
+        <div className='flex justify-start xs:justify-center w-auto min-w-[60px] xs:min-w-[80px] group mr-1'>
           <img
             className='w-[60px] xs:w-[80px]'
             src={roleSource} alt="">
           </img>
         </div>
 
-        <div id='top-cards' className='w-full flex justify-center'>
-          <div className='max-h-full w-[240px] xs:w-[320px] flex relative'>
-            {cardsInHand.map((card, index) => {
-              let translate = 0
-              let magicConstant = 222
-              let cardWidth = 60
-              const topCardsDiv = document.getElementById('top-cards')
-              if (topCardsDiv !== null) {
-                topCardsDiv.offsetWidth > 260 ? magicConstant = largeMagicConstant : magicConstant = smallMagicConstant
-                topCardsDiv.offsetWidth > 260 ? cardWidth = 90 : cardWidth = 60
-              }
-              if (cardsInHand.length >= cardClampLimit) {
-                translate = -((cardsInHand.length) * cardWidth - magicConstant) / (cardsInHand.length - 1) * index
-              }
-              return (
-                <img
-                  key={index}
-                  className='w-[60px] xs:w-[80px]'
-                  style={{ transform: `translate(${translate}px, 0)` }}
-                  src={require('../img/gfx/cards/back-playing.png')} alt="" />
-              )
-            })}
-          </div>
-        </div>
+        <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
 
       </div>
       <div className='space-x-2 absolute left-[100%] translate-x-[-100%] rotate-0 mt-1 xs:mt-2 flex justify-center'>
