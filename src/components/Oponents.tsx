@@ -112,7 +112,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
   } else if (oponentsInfo.length === 3) {
     return (
       <div>
-        <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[348px] xs:top-[320px] rotate-90'>
+        <div className='fixed z-10 flex items-end justify-start w-[490px] left-[-172px] xs:left-[-158px] top-[248px] xs:top-[320px] rotate-90'>
           <SidePlayerTable
             role={knownRoles[oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name]}
             oponentName={oponentsInfo[clamp(playerIndex + 0, allPlayersInfo.length - 1)].name}
@@ -142,7 +142,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
             />
           </div>
         </div>
-        <div className='fixed z-10 flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[348px] xs:top-[320px] rotate-[270deg]'>
+        <div className='fixed z-10 flex items-end justify-end w-[490px] right-[-172px] xs:right-[-158px] top-[248px] xs:top-[320px] rotate-[270deg]'>
           <SidePlayerTable
             role={knownRoles[oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name]}
             oponentName={oponentsInfo[clamp(playerIndex + 2, allPlayersInfo.length - 1)].name}

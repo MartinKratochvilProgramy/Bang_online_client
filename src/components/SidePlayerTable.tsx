@@ -101,7 +101,7 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
               let cardClamp = 3 // how many cards in hand before it gets squished
               const cardsElement = document.getElementById('cards')
               if (cardsElement !== null) {
-                cardsElement.offsetWidth > 260 ? magicConstant = 292 : magicConstant = 112
+                cardsElement.offsetWidth > 260 ? magicConstant = 300 : magicConstant = 110
                 cardsElement.offsetWidth > 260 ? cardWidth = 90 : cardWidth = 60
                 cardsElement.offsetWidth > 260 ? cardClamp = 4 : cardClamp = 3
               }
