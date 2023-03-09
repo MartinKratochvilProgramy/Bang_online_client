@@ -10,14 +10,14 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
 
   const numberOfCards = cardsInHand.length
 
-  const divWidth = (cardsElement != null) ? cardsElement.offsetWidth : 0
+  const divWidth = (cardsElement != null) ? cardsElement.offsetWidth : 0 // total width of the main container
 
-  let cardWidth = 60
+  let cardWidth = 60 // width of one card
   divWidth > 260 ? cardWidth = 80 : cardWidth = 60
 
-  const cardsWidth = numberOfCards * cardWidth
+  const cardsWidth = numberOfCards * cardWidth // width of all cards in hand
 
-  let dx = 0
+  let dx = 0 // step in x direction by which card should be translated -> if cards do not need overlap, this stays 0
   if (cardsWidth > divWidth) {
     dx = -(cardsWidth - divWidth) / (numberOfCards - 1)
   }
