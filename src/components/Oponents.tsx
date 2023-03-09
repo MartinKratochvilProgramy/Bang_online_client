@@ -3,9 +3,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectActiveCard, setActiveCard } from '../features/activeCardSlice'
 import { type CharacterInfo, selectAllCharactersInfo } from '../features/allCharactersInfoSlice'
 import { SidePlayerTable } from './SidePlayerTable'
-import { TopLeftPlayerTable } from './TopLeftPlayerTable'
 import { TopPlayerTable } from './TopPlayerTable'
-import { TopRightPlayerTable } from './TopRightPlayerTable'
 import { type PlayerInfo, selectAllPlayersInfo } from '../features/allPlayersInfoSlice'
 import { selectCharacter } from '../features/characterSlice'
 import { selectCurrentRoom } from '../features/currentRoomSlice'
@@ -226,7 +224,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
         </div>
         <div className='fixed top-0 left-0 right-0 flex justify-center space-x-2 z-5'>
           <div className='w-[350px] xs:w-[620px] z-1'>
-            <TopLeftPlayerTable
+            <TopPlayerTable
               role={knownRoles[oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name]}
               oponentName={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].name}
               health={oponentsInfo[clamp(playerIndex + 1, allPlayersInfo.length - 1)].health}
@@ -250,7 +248,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
             />
           </div>
           <div className='w-[350px] xs:w-[620px] z-[11]'>
-            <TopRightPlayerTable
+            <TopPlayerTable
               role={knownRoles[oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name]}
               oponentName={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].name}
               health={oponentsInfo[clamp(playerIndex + 3, allPlayersInfo.length - 1)].health}
