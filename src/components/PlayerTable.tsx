@@ -28,7 +28,7 @@ import { socket } from '../socket'
 
 interface Props {
   predictUseCard: (cardName: string, cardDigit: number, cardType: string) => void
-  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
+  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string, oponentName: string) => void
 }
 
 export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget }) => {

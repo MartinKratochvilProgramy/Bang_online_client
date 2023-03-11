@@ -7,7 +7,7 @@ import { type CardI } from '../types/card'
 interface Props {
   card: CardI
   oponentName: string
-  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
+  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string, oponentName: string) => void
 }
 
 export const OponentCardOnTable: React.FC<Props> = ({ card, oponentName, confirmCardTarget }) => {
@@ -26,7 +26,7 @@ export const OponentCardOnTable: React.FC<Props> = ({ card, oponentName, confirm
 
   return (
     <button
-      onClick={() => { confirmCardTarget(card.name, card.digit, card.type) }}
+      onClick={() => { confirmCardTarget(card.name, card.digit, card.type, oponentName) }}
       style={styles}
       className='w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>
       <img src={cardSource} alt="" />

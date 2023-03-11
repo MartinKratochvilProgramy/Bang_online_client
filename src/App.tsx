@@ -8,7 +8,7 @@ import { setPlayerCharacterChoice } from './features/playerCharacterChoice'
 import { setCharacterChoiceInProgressTrue, setCharacterChoiceInProgressFalse } from './features/characterChoiceInProgressSlice'
 import { setAllPlayersInfo, selectAllPlayersInfo } from './features/allPlayersInfoSlice'
 import { setAllCharactersInfo } from './features/allCharactersInfoSlice'
-import { selectMyDrawChoice, setMyDrawChoice } from './features/myDrawChoice'
+import { selectMyDrawChoice } from './features/myDrawChoice'
 import { setCharacter } from './features/characterSlice'
 import { setRooms } from './features/roomsSlice'
 import { setNextEmporioTurn } from './features/nextEmporioTurnSlice'
@@ -78,10 +78,6 @@ function App () {
       }
     })
 
-    socket.on('my_draw_choice', hand => {
-      dispatch(setMyDrawChoice(hand))
-    })
-
     socket.on('update_all_players_info', (players) => {
       // returns array [{name, numberOfCards, health}]
       dispatch(setAllPlayersInfo(players))
@@ -103,10 +99,8 @@ function App () {
       socket.off('get_players')
       socket.off('game_started')
       socket.off('characters')
-      socket.off('my_draw_choice')
       socket.off('update_all_players_info')
       socket.off('emporio_state')
-      //     socket.off('game_ended')
     }
   }, [currentRoom, username])
 

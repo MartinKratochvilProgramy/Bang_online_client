@@ -9,7 +9,7 @@ import { type CardI } from '../types/card'
 
 interface Props {
   card: CardI
-  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
+  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string, oponentName: string) => void
 }
 
 export const CardOnTable: React.FC<Props> = ({ card, confirmCardTarget }) => {
@@ -19,7 +19,8 @@ export const CardOnTable: React.FC<Props> = ({ card, confirmCardTarget }) => {
 
   function playCardOnTable () {
     if (selectCardTarget) {
-      confirmCardTarget(card.name, card.digit, card.type)
+      if (username === null) return
+      confirmCardTarget(card.name, card.digit, card.type, username)
     }
     if (!card.isPlayable) return
     if (card.name === 'Barilo') {

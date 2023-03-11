@@ -7,8 +7,6 @@ import { type KnownRoles } from '../types/knownRoles'
 import { setKnownRoles } from '../features/knownRolesSlice'
 import { selectMyHand, setMyHand } from '../features/myHandSlice'
 import { setNextTurnTrue, setNextTurnFalse } from '../features/nextTurnSlice'
-
-import { socket } from '../socket'
 import { type CardI } from '../types/card'
 import { selectPlayersLosingHealth, setPlayersLosingHealth } from '../features/playersLosingHealthSlice'
 import { selectAllPlayersInfo } from '../features/allPlayersInfoSlice'
@@ -35,6 +33,9 @@ import { StackDeck } from './StackDeck'
 import { Oponents } from './Oponents'
 import { selectCharacter } from '../features/characterSlice'
 import { setDeckActiveTrue } from '../features/deckActiveSlice'
+import { setMyDrawChoice } from '../features/myDrawChoice'
+
+import { socket } from '../socket'
 
 export const Game = () => {
   const username = useAppSelector(selectUsername)
@@ -166,6 +167,10 @@ export const Game = () => {
       }
     })
 
+    socket.on('my_draw_choice', hand => {
+      dispatch(setMyDrawChoice(hand))
+    })
+
     return () => {
       socket.off('my_hand')
       socket.off('known_roles')
@@ -178,6 +183,7 @@ export const Game = () => {
       socket.off('end_discard')
       socket.off('jourdonnais_can_use_barel')
       socket.off('update_draw_choices')
+      socket.off('my_draw_choice')
     }
   }, [character, currentRoom, setCharacterUsableTrue, username])
 
@@ -192,15 +198,15 @@ export const Game = () => {
     dispatch(setMyHand(newMyHand))
   }
 
-  function confirmCardTarget (cardName: string, cardDigit: number, cardType: string) {
+  function confirmCardTarget (cardName: string, cardDigit: number, cardType: string, oponentName: string) {
     if (!selectCardTarget) return
     dispatch(setSelectPlayerTargetFalse())
     dispatch(setSelectCardTargetFalse())
     if (activeCard === null) return
     if (activeCard.name === 'Cat Balou') {
-      socket.emit('play_cat_ballou_on_table_card', { activeCard, username, target: cardName, currentRoom, cardDigit, cardType })
+      socket.emit('play_cat_ballou_on_table_card', { username, currentRoom, activeCard, target: oponentName, cardName, cardDigit, cardType })
     } else if (activeCard.name === 'Panico') {
-      socket.emit('play_panico_on_table_card', { activeCard, username, target: cardName, currentRoom, cardDigit, cardType })
+      socket.emit('play_panico_on_table_card', { username, currentRoom, activeCard, target: oponentName, cardName, cardDigit, cardType })
     }
     predictUseCard(cardName, cardDigit, cardType)
     dispatch(setActiveCard(null))

@@ -14,7 +14,7 @@ interface Props {
   character: string
   table: CardI[]
   cardsInHand: number[]
-  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
+  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string, oponentName: string) => void
   confirmPlayerTarget: (target: string) => void
   role?: string
 }

@@ -20,7 +20,7 @@ import { setSelectCardTargetFalse } from '../features/selectCardTargetSlice'
 
 interface Props {
   predictUseCard: (cardName: string, cardDigit: number, cardType: string) => void
-  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string) => void
+  confirmCardTarget: (cardName: string, cardDigit: number, cardType: string, oponentName: string) => void
 }
 
 export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget }) => {
