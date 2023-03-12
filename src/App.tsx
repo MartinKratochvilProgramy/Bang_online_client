@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect } from 'react'
+import './App.css'
 import { selectUsername, setUsername } from './features/usernameSlice'
 import { selectCurrentRoom } from './features/currentRoomSlice'
 import { useAppDispatch, useAppSelector } from './app/hooks'
@@ -13,18 +13,17 @@ import { setCharacter } from './features/characterSlice'
 import { setRooms } from './features/roomsSlice'
 import { setNextEmporioTurn } from './features/nextEmporioTurnSlice'
 import { selectEmporioState, setEmporioState } from './features/emporioStateSlice'
-import './App.css'
 import { RoomSelect } from './components/RoomSelect'
 import { Room } from './components/Room'
 import { Game } from './components/Game'
 import { setPlayers } from './features/playersSlice'
 import { selectWinner, setWinner } from './features/winnerSlice'
 import { type PlayerInfo } from './features/allPlayersInfoSlice'
-
-import { socket } from './socket'
 import { GameEnd } from './components/GameEnd'
 import { DrawChoice } from './components/DrawChoice'
 import { EmporioChoice } from './components/EmporioChoice'
+
+import { socket } from './socket'
 
 function App () {
   const currentRoom = useAppSelector(selectCurrentRoom)
@@ -36,6 +35,55 @@ function App () {
   const allPlayersInfo = useAppSelector(selectAllPlayersInfo)
 
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    // on app load, store following images in local cache, so that when cards appear in
+    // game they don't have to be downloaded for the first time
+    const imagesToPreload = [
+      './img/gfx/cards/Apaloosa.png',
+      './img/gfx/cards/back-playing.png',
+      './img/gfx/cards/Bang.png',
+      './img/gfx/cards/Barilo.png',
+      './img/gfx/cards/Beer.png',
+      './img/gfx/cards/CatBalou.png',
+      './img/gfx/cards/Diligenza.png',
+      './img/gfx/cards/Duel.png',
+      './img/gfx/cards/Dynamite.png',
+      './img/gfx/cards/Emporio.png',
+      './img/gfx/cards/Gatling.png',
+      './img/gfx/cards/Indiani.png',
+      './img/gfx/cards/Mancato.png',
+      './img/gfx/cards/Mustang.png',
+      './img/gfx/cards/Panico.png',
+      './img/gfx/cards/Prigione.png',
+      './img/gfx/cards/Remington.png',
+      './img/gfx/cards/RevCarabine.png',
+      './img/gfx/cards/Saloon.png',
+      './img/gfx/cards/Schofield.png',
+      './img/gfx/cards/Vulcanic.png',
+      './img/gfx/cards/WellsFargo.png',
+      './img/gfx/cards/Winchester.png'
+    ]
+
+    async function cacheImages (imageRoutes: string[]) {
+      // this has to be inside useEffect, otherwise compiler will complain
+      const promises = imageRoutes.map(async (imageRoute) => {
+        await new Promise<void>((resolve, reject) => {
+          const img = new Image()
+
+          img.src = imageRoute
+          img.onload = () => { resolve() }
+          // eslint-disable-next-line prefer-promise-reject-errors
+          img.onerror = () => { reject() }
+        })
+      })
+
+      await Promise.all(promises)
+    }
+
+    // eslint-disable-next-line no-console
+    cacheImages(imagesToPreload).catch(console.error)
+  }, [])
 
   useEffect(() => {
     socket.on('username_changed', (username) => {
