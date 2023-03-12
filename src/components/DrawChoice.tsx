@@ -2,13 +2,13 @@ import React from 'react'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectMyDrawChoice, setMyDrawChoice } from '../features/myDrawChoice'
 import { type CardI } from '../types/card'
-
-import { socket } from '../socket'
 import { setCharacterUsableFalse } from '../features/characterUsableSlice'
 import { selectCharacter } from '../features/characterSlice'
 import { selectMyHand, setMyHand } from '../features/myHandSlice'
 import { selectUsername } from '../features/usernameSlice'
 import { selectCurrentRoom } from '../features/currentRoomSlice'
+
+import { socket } from '../socket'
 
 export const DrawChoice = () => {
   const myDrawChoice = useAppSelector(selectMyDrawChoice)

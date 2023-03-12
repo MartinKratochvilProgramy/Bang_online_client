@@ -7,7 +7,7 @@ import { selectUsername } from '../features/usernameSlice'
 import { setCharacterUsableFalse } from '../features/characterUsableSlice'
 import { setSelectPlayerTargetFalse } from '../features/selectPlayerTargetSlice'
 import { setNextTurnTrue } from '../features/nextTurnSlice'
-import { selectTopStackCard, setTopStackCard } from '../features/topStackCardSlice'
+import { selectTopStackCard, setTopStackCard, setTopStackCardNotActive } from '../features/topStackCardSlice'
 import { type CardI } from '../types/card'
 
 import { socket } from '../socket'
@@ -49,9 +49,12 @@ export const StackDeck = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-  if (topStackCard !== null && topStackCard.isPlayable) {
+  if (topStackCard != null && topStackCard !== undefined) {
+    // this has to be here, otherwise CK take choice card bricks the game
     try {
-      topStackCard.isPlayable = false
+      if (topStackCard.isPlayable) {
+        dispatch(setTopStackCardNotActive())
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error)
@@ -62,7 +65,7 @@ export const StackDeck = () => {
 
   return (
     <div className='flex space-x-4'>
-      {topStackCard !== null &&
+      {(topStackCard != null && topStackCard !== undefined) &&
         <Card
           card={topStackCard}
           stackCard={true}
