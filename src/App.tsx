@@ -86,6 +86,22 @@ function App () {
   }, [])
 
   useEffect(() => {
+    socket.on('game_started', data => {
+      dispatch(setCharacterChoiceInProgressFalse())
+      // setGameStarted(true) ???
+      if (currentRoom !== null) {
+        socket.emit('get_my_role', { username, currentRoom })
+      }
+      dispatch(setAllPlayersInfo(data.allPlayersInfo)) // info about health, hands...
+      dispatch(setAllCharactersInfo(data.allCharactersInfo)) // info about character names
+    })
+
+    return () => {
+      socket.off('game_started')
+    }
+  }, [currentRoom])
+
+  useEffect(() => {
     socket.on('username_changed', (username) => {
       dispatch(setUsername(username))
     })
@@ -98,25 +114,6 @@ function App () {
       dispatch(setPlayerCharacterChoice(characters[username]))
     })
 
-    socket.on('rooms', (rooms) => {
-      dispatch(setRooms(rooms))
-    })
-
-    socket.on('get_players', (players) => {
-      dispatch(setPlayers(players))
-    })
-
-    // GAME LOGIC
-    socket.on('game_started', data => {
-      dispatch(setCharacterChoiceInProgressFalse())
-      // setGameStarted(true) ???
-      if (currentRoom !== null) {
-        socket.emit('get_my_role', { username, currentRoom })
-      }
-      dispatch(setAllPlayersInfo(data.allPlayersInfo)) // info about health, hands...
-      dispatch(setAllCharactersInfo(data.allCharactersInfo)) // info about character names
-    })
-
     socket.on('characters', characters => {
       for (const character of characters) {
         if (character.playerName === username) {
@@ -124,6 +121,22 @@ function App () {
           break
         }
       }
+    })
+
+    return () => {
+      socket.off('username_changed')
+      socket.off('get_character_choices')
+      socket.off('characters')
+    }
+  }, [username])
+
+  useEffect(() => {
+    socket.on('rooms', (rooms) => {
+      dispatch(setRooms(rooms))
+    })
+
+    socket.on('get_players', (players) => {
+      dispatch(setPlayers(players))
     })
 
     socket.on('update_all_players_info', (players) => {
@@ -141,16 +154,12 @@ function App () {
     })
 
     return () => {
-      socket.off('username_changed')
-      socket.off('get_character_choices')
       socket.off('rooms')
       socket.off('get_players')
-      socket.off('game_started')
-      socket.off('characters')
       socket.off('update_all_players_info')
       socket.off('emporio_state')
     }
-  }, [currentRoom, username])
+  }, [])
 
   useEffect(() => {
     socket.on('update_health', (playerHealthInfo) => {

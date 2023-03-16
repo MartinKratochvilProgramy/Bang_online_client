@@ -81,7 +81,7 @@ export const Game = () => {
         break
       }
     }
-  }, [playersActionRequiredOnStart, username, setCharacterUsableFalse, character])
+  }, [playersActionRequiredOnStart, username, character])
 
   useEffect(() => {
     socket.on('known_roles', (roles: KnownRoles) => {

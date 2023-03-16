@@ -10,7 +10,7 @@ import { selectDiscarding, setDiscardingFalse, setDiscardingTrue } from '../feat
 import { selectIsLosingHealth, setIsLosingHealthFalse } from '../features/isLosingHealthSlice'
 import { selectMyHand, setMyHand, setMyHandNotPlayable } from '../features/myHandSlice'
 import { selectMyHealth } from '../features/myHealthSlice'
-import { selectNextTurn, setNextTurnTrue } from '../features/nextTurnSlice'
+import { selectNextTurn } from '../features/nextTurnSlice'
 import { setSelectCardTargetFalse } from '../features/selectCardTargetSlice'
 import { selectSelectPlayerTarget, setSelectPlayerTargetFalse } from '../features/selectPlayerTargetSlice'
 import { selectUsername } from '../features/usernameSlice'
@@ -104,22 +104,16 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
       socket.emit('jourdonnais_barel', { currentRoom, username })
     }
 
-    if (character === 'Pedro Ramirez') {
-      dispatch(setCharacterUsableFalse())
-      dispatch(setSelectPlayerTargetFalse())
-      dispatch(setDeckActiveFalse())
-      dispatch(setNextTurnTrue())
-
-      socket.emit('get_stack_card_PR', { currentRoom, username })
-    }
-
     if (character === 'Sid Ketchum') {
       dispatch(setDiscardingTrue())
     }
   }
 
   function handleCharacterClick () {
-    if ((characterUsable && character !== 'Kit Carlson') || (characterUsable && character === 'Jesse Jones') || (currentPlayer === username && (character === 'Sid Ketchum') && nextTurn)) {
+    if (
+      (characterUsable && character !== 'Kit Carlson') ||
+      (characterUsable && character === 'Jesse Jones') ||
+      (currentPlayer === username && (character === 'Sid Ketchum') && nextTurn)) {
       activateCharacter()
     }
   }
@@ -148,7 +142,9 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
 
   let characterStyles = {}
   if ((characterUsable && character !== 'Kit Carlson') || (characterUsable && character === 'Jesse Jones') || (currentPlayer === username && (character === 'Sid Ketchum') && nextTurn)) {
-    characterStyles = { color: 'red', border: 'solid 2px red', cursor: 'pointer' }
+    if (character !== 'Pedro Ramirez') {
+      characterStyles = { border: 'solid 2px red', cursor: 'pointer' }
+    }
   }
 
   return (

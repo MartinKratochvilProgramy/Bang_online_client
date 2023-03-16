@@ -4,11 +4,12 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectDeckActive, setDeckActiveFalse } from '../features/deckActiveSlice'
 import { selectCurrentRoom } from '../features/currentRoomSlice'
 import { selectUsername } from '../features/usernameSlice'
-import { setCharacterUsableFalse } from '../features/characterUsableSlice'
+import { selectCharacterUsable, setCharacterUsableFalse } from '../features/characterUsableSlice'
 import { setSelectPlayerTargetFalse } from '../features/selectPlayerTargetSlice'
 import { setNextTurnTrue } from '../features/nextTurnSlice'
 import { selectTopStackCard, setTopStackCard, setTopStackCardNotActive } from '../features/topStackCardSlice'
 import { type CardI } from '../types/card'
+import { selectCharacter } from '../features/characterSlice'
 
 import { socket } from '../socket'
 
@@ -17,6 +18,8 @@ export const StackDeck = () => {
   const currentRoom = useAppSelector(selectCurrentRoom)
   const deckActive = useAppSelector(selectDeckActive)
   const topStackCard = useAppSelector(selectTopStackCard)
+  const character = useAppSelector(selectCharacter)
+  const characterUsable = useAppSelector(selectCharacterUsable)
 
   const dispatch = useAppDispatch()
 
@@ -43,9 +46,14 @@ export const StackDeck = () => {
     drawFromDeck()
   }
 
-  let cardstyles = {}
+  let deckStyle = {}
   if (deckActive) {
-    cardstyles = { border: 'solid 2px red', cursor: 'pointer' }
+    deckStyle = { border: 'solid 2px red', cursor: 'pointer' }
+  }
+
+  let stackStyle = {}
+  if (characterUsable && character === 'Pedro Ramirez') {
+    stackStyle = { border: 'solid 2px red', cursor: 'pointer' }
   }
 
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
@@ -63,20 +71,37 @@ export const StackDeck = () => {
     }
   }
 
+  function getTopStackCard () {
+    if (character === 'Pedro Ramirez') {
+      dispatch(setCharacterUsableFalse())
+      dispatch(setSelectPlayerTargetFalse())
+      dispatch(setDeckActiveFalse())
+      dispatch(setNextTurnTrue())
+
+      socket.emit('get_stack_card_PR', { currentRoom, username })
+    }
+  }
+
   return (
     <div className='flex space-x-4'>
       {(topStackCard != null && topStackCard !== undefined) &&
-        <Card
-          card={topStackCard}
-          stackCard={true}
-          predictUseCard={() => {}}
-          predictUseBlueCard={() => {}}
-          key={`${topStackCard.name}-${topStackCard.digit}-${topStackCard.type}`}
-        />
+        <div
+          style={stackStyle}
+          className='rounded-md'
+          onClick={() => { getTopStackCard() }}
+        >
+          <Card
+            card={topStackCard}
+            stackCard={true}
+            predictUseCard={() => {}}
+            predictUseBlueCard={() => {}}
+            key={`${topStackCard.name}-${topStackCard.digit}-${topStackCard.type}`}
+          />
+        </div>
       }
       <img
         className='w-[60px] xs:w-[80px] rounded-md'
-        style={cardstyles}
+        style={deckStyle}
         src={require('../img/gfx/cards/back-playing.png')}
         alt="deck card"
         onClick={() => { handleClick() }}
