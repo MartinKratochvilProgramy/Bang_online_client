@@ -91,7 +91,7 @@ export const StackDeck = () => {
           onClick={() => { getTopStackCard() }}
         >
           <img
-            className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md'
+            className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md'
             style={deckStyle}
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             src={require('../img/gfx/cards/' + topStackCard.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + '.png')}
@@ -101,7 +101,7 @@ export const StackDeck = () => {
         </div>
       }
       <img
-        className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md'
+        className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md'
         style={deckStyle}
         src={require('../img/gfx/cards/back-playing.png')}
         alt="deck card"

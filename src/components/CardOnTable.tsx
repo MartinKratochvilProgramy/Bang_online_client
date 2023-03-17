@@ -48,7 +48,7 @@ export const CardOnTable: React.FC<Props> = ({ card, confirmCardTarget }) => {
     <button
       onClick={() => { playCardOnTable() }}
       style={styles}
-      className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>
+      className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>
       <img src={cardSource} alt="" />
       <div className='hidden p-1 z-40 font-rye absolute rounded group-hover:flex group-hover:flex-col group-hover:justify-center translate-y-[-60px] bg-transparentBlack text-white'>
         <div className='text-xl'>

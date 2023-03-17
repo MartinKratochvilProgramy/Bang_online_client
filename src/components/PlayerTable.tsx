@@ -149,7 +149,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
 
   return (
     <div className='relative max-w-[600px] xs:max-w-[900px] w-full'>
-      <div className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-60px] sm:translate-y-[-94px] xs:translate-y-[-130px]'>
+      <div className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-56px] sm:translate-y-[-94px] xs:translate-y-[-130px]'>
         {table.map(card => {
           return (
             <CardOnTable
@@ -165,7 +165,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
       >
         <div className='flex min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] flex-col text-[10px] xs:text-sm items-start'>
           <div className='flex flex-col justify-start items-start'>
-            <div className='overflow-hidden '>{username}</div>
+            <div className='overflow-hidden'>{username}</div>
             <div className=''>HP: {myHealth}</div>
           </div>
           <div className='relative group'>

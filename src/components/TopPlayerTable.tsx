@@ -93,7 +93,7 @@ export const TopPlayerTable: React.FC<Props> = ({
         <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
 
       </div>
-      <div className='space-x-2 absolute left-[50%] translate-x-[-50%] rotate-0 mt-1 xs:mt-2 flex justify-center'>
+      <div className='space-x-2 absolute left-[50%] translate-x-[-50%] rotate-0 mt-0 xs:mt-2 flex justify-center'>
         {table.map(card => {
           return (
             <OponentCardOnTable
