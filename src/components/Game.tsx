@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectCharacterChoiceInProgress } from '../features/characterChoiceInProgressSlice'
 import { CharacterChoice } from './CharacterChoice'
@@ -48,6 +48,8 @@ export const Game = () => {
   const selectCardTarget = useAppSelector(selectSelectCardTarget)
   const activeCard = useAppSelector(selectActiveCard)
   const myHand = useAppSelector(selectMyHand)
+
+  const [isVerticalMobile, setIsVerticalMobile] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -212,6 +214,23 @@ export const Game = () => {
     dispatch(setActiveCard(null))
   }
 
+  useEffect(() => {
+    // isVerticalMobile handles hiding Chat and Console on vertical mobile screen
+    const handleResize = () => {
+      if (window.innerWidth > 400) {
+        setIsVerticalMobile(true)
+      } else {
+        setIsVerticalMobile(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <div id='game'>
       {characterChoiceInProgress
@@ -234,12 +253,12 @@ export const Game = () => {
           </div>
 
           <div className='fixed flex justify-between items-end bottom-0 left-0 right-0 z-[50]'>
-            <Chat width={260} />
+            {isVerticalMobile && <Chat width={260} />}
             <PlayerTable
               predictUseCard={predictUseCard}
               confirmCardTarget={confirmCardTarget}
             />
-            <Console />
+            {isVerticalMobile && <Console />}
           </div>
         </>
       }

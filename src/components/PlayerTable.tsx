@@ -149,7 +149,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
 
   return (
     <div className='relative max-w-[600px] xs:max-w-[900px] w-full'>
-      <div className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-94px] xs:translate-y-[-130px]'>
+      <div className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-82px] sm:translate-y-[-94px] xs:translate-y-[-130px]'>
         {table.map(card => {
           return (
             <CardOnTable
@@ -161,9 +161,9 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
         })}
       </div>
       <div
-        className='flex justify-between items-end mx-4 h-[135px] xs:h-[176px] bg-beige rounded p-2 pt-3 relative font-rye'
+        className='flex justify-between items-end mx-4 h-[120px] sm:h-[135px] xs:h-[176px] bg-beige rounded p-2 pt-3 relative font-rye'
       >
-        <div className='flex min-w-[60px] xs:min-w-[80px] flex-col text-xs xs:text-sm items-start'>
+        <div className='flex min-w-[50px] sm:min-w-[60px] xs:min-w-[80px] flex-col text-xs xs:text-sm items-start'>
           <div className='flex flex-col justify-start items-start'>
             <div className='overflow-hidden '>{username}</div>
             <div className=''>HP: {myHealth}</div>
@@ -173,7 +173,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
               src={characterSource}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
-              className='w-[60px] xs:w-[80px] rounded-md mr-4' alt="Player character">
+              className='w-[50px] sm:w-[60px] xs:w-[80px] rounded-md mr-4' alt="Player character">
             </img>
             <div className='hidden p-1 rounded group-hover:flex group-hover:flex-col group-hover:justify-center top-[-86px] left-[-60px] w-[200px] mx-auto bg-transparentBlack text-white absolute'>
               <div className='text-xl'>
@@ -189,7 +189,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
         {role !== '' &&
           <div className='flex w-[120px] relative group'>
             <img
-              className='w-[60px] xs:w-[80px]'
+              className='w-[50px] sm:w-[60px] xs:w-[80px]'
               src={roleSource} alt="">
             </img>
             <div className='hidden p-1 rounded group-hover:flex group-hover:flex-col group-hover:justify-center top-[-70px] left-[-40px] w-[160px] mx-auto bg-transparentBlack text-white absolute'>

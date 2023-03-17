@@ -12,8 +12,14 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
 
   const divWidth = (cardsElement != null) ? cardsElement.offsetWidth : 0 // total width of the main container
 
-  let cardWidth = 60 // width of one card
-  divWidth > 260 ? cardWidth = 80 : cardWidth = 60
+  let cardWidth = 50 // width of one card
+  if (divWidth <= 200) {
+    cardWidth = 50
+  } else if (divWidth > 200 && divWidth <= 250) {
+    cardWidth = 60
+  } else {
+    cardWidth = 80
+  }
 
   const cardsWidth = numberOfCards * cardWidth // width of all cards in hand
 

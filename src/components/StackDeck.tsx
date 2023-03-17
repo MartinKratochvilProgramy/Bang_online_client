@@ -100,7 +100,7 @@ export const StackDeck = () => {
         </div>
       }
       <img
-        className='w-[60px] xs:w-[80px] rounded-md'
+        className='w-[50px] sm:w-[60px] xs:w-[80px] rounded-md'
         style={deckStyle}
         src={require('../img/gfx/cards/back-playing.png')}
         alt="deck card"

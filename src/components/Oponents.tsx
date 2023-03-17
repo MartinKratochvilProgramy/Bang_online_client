@@ -96,7 +96,7 @@ export const Oponents: React.FC<Props> = ({ predictUseCard, confirmCardTarget })
 
   if (oponentsInfo.length === 1) {
     return (
-      <div className='w-[390px] xs:w-[560px] z-50 fixed left-[50%] translate-x-[-50%]'>
+      <div className='w-[320px] sm:w-[390px] xs:w-[560px] z-50 fixed left-[50%] translate-x-[-50%]'>
         <TopPlayerTable
           oponentName={oponentsInfo[0].name}
           health={oponentsInfo[0].health}
