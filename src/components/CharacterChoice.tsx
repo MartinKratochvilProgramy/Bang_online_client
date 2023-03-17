@@ -35,7 +35,7 @@ export const CharacterChoice = () => {
           }
           return (
             <img
-              className='w-[125px] sm:w-[185px] xs:w-[260px] rounded-2xl hover:shadow-2xl cursor-pointer'
+              className='w-[125px] sm:w-[185px] xs:w-[260px] rounded-1xl sm:rounded-2xl hover:shadow-2xl cursor-pointer'
               src={characterSource}
               key={characterChoice}
               style={styles}
