@@ -35,10 +35,15 @@ export const Room = () => {
 
   return (
     <div>
-      <div className='text-outline font-rye text-8xl text-white my-4'>{currentRoom}</div>
-      <Button size={1.8} value={'Disconnect'} onClick={leaveRoom} />
-      <div className='text-outline font-rye text-6xl text-white my-2'>Players ({players.length}/6)</div>
-      <div className='grid grid-cols-2 xs:grid-cols-1 space-x-2 flex-col justify-center items-center'>
+      <div className='text-outline font-rye break-all text-4xl sm:text-6xl text-white mt-6 sm:mt-12 mb-4 sm:mb-6'>
+        {currentRoom}
+      </div>
+      <Button size={1.8} value={'DISCONNECT'} onClick={leaveRoom} />
+
+      <div className='text-outline font-rye text-4xl sm:text-6xl text-white my-2 mt-8 sm:mt-16'>
+        Players ({players.length}/6):
+      </div>
+      <div className='grid grid-cols-2 sm:grid-cols-1 space-x-2 flex-col justify-center items-center'>
         {players.map((player: Player) => {
           return (
             <div key={player.username} className='text-outline font-rye text-4xl text-white my-2'>{player.username}</div>
@@ -47,7 +52,7 @@ export const Room = () => {
       </div>
 
       {(isAdmin && (players.length === 2 || (players.length >= 4 && players.length <= 6))) &&
-        <Button onClick={startGame} value={'Start game'} size={2} />
+        <Button onClick={startGame} value={'START GAME'} size={2} />
       }
 
       <div className='flex justify-center mt-8'>
