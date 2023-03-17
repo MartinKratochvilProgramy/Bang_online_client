@@ -56,9 +56,9 @@ export const TopPlayerTable: React.FC<Props> = ({
   return (
     <div className='relative'>
       <div
-        className='flex justify-start items-start h-[120px] sm:h-[135px] xs:h-[176px] bg-beige rounded p-2'
+        className='flex justify-start items-start h-[94px] sm:h-[135px] xs:h-[176px] bg-beige rounded px-2 py-1 sm:p-2'
       >
-        <div className='flex z-20 w-auto min-w-[50px] sm:min-w-[60px] xs:min-w-[80px] text-xs xs:text-sm flex-col-reverse items-start font-rye'>
+        <div className='flex z-20 w-auto min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] text-xs xs:text-sm flex-col-reverse items-start font-rye'>
           <div className='flex flex-col items-start'>
             <div className='overflow-visible'>{oponentName}</div>
             <div>HP: {health}</div>
@@ -68,7 +68,7 @@ export const TopPlayerTable: React.FC<Props> = ({
               src={characterSource}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
-              className='w-[50px] sm:w-[60px] xs:w-[80px]  rounded-md mr-2' alt="Player character">
+              className='w-[38px] sm:w-[60px] xs:w-[80px]  rounded-md mr-2' alt="Player character">
             </img>
             <div className='hidden p-1 rounded group-hover:flex group-hover:flex-col group-hover:justify-center top-[96px] xs:top-[126px] w-[200px] mx-auto bg-transparentBlack text-white absolute'>
               <div className='text-xl'>
@@ -81,9 +81,11 @@ export const TopPlayerTable: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className='flex justify-start xs:justify-center w-auto min-w-[50px] sm:min-w-[60px] xs:min-w-[80px] group mr-1'>
+        <div
+          id='top-player-character'
+          className='flex justify-start xs:justify-center w-auto min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] group mr-1'>
           <img
-            className='w-[50px] sm:w-[60px] xs:w-[80px]'
+            className='w-[38px] sm:w-[60px] xs:w-[80px]'
             src={roleSource} alt="">
           </img>
         </div>

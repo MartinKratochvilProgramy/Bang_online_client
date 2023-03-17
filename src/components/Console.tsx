@@ -26,7 +26,7 @@ export const Console = () => {
   return (
     <div
       id='console-output'
-      className='bg-beige rounded w-[280px] xs:w-[320px] p-2 text-sm xs:text-md overflow-auto  h-[160px] xs:h-[240px]'>
+      className='bg-beige rounded w-[200px] sm:w-[280px] xs:w-[320px] p-2 text-sm xs:text-md overflow-auto h-[120px] xs:h-[240px]'>
       {consoleOutput.map((message, index) => {
         return (
           <div key={index} className='flex text-start w-full my-1'>

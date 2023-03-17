@@ -49,10 +49,10 @@ export const Chat: React.FC<Props> = ({ width }) => {
   }, [])
 
   return (
-    <div className='w-[280px] xs:w-[440px]'>
+    <div className='w-[210px] sm:w-[280px] xs:w-[440px]'>
       <pre
         id="text"
-        className='bg-beige ml-0 rounded p-2 text-start text-sm xs:text-md overflow-y-auto overflow-x-clip w-full h-[120px] xs:h-[200px] font-rye break-words'
+        className='bg-beige ml-0 rounded p-2 text-start text-sm xs:text-md overflow-y-auto overflow-x-clip w-full h-[80px] sm:h-[120px] xs:h-[200px] font-rye break-words'
       >
         {messages.map((message, index) => {
           return (
@@ -83,11 +83,11 @@ export const Chat: React.FC<Props> = ({ width }) => {
             onChange={(e) => { setMessageInput(e.target.value) }}
             value={messageInput}
           />
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <Button
               onClick={() => { }}
               value={'Send'}
-              size={1.5}
+              size={1}
             />
           </div>
 

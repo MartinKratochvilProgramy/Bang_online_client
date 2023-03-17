@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card } from './Card'
+// import { Card } from './Card'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectDeckActive, setDeckActiveFalse } from '../features/deckActiveSlice'
 import { selectCurrentRoom } from '../features/currentRoomSlice'
@@ -90,17 +90,18 @@ export const StackDeck = () => {
           className='rounded-md'
           onClick={() => { getTopStackCard() }}
         >
-          <Card
-            card={topStackCard}
-            stackCard={true}
-            predictUseCard={() => {}}
-            predictUseBlueCard={() => {}}
-            key={`${topStackCard.name}-${topStackCard.digit}-${topStackCard.type}`}
+          <img
+            className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md'
+            style={deckStyle}
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+            src={require('../img/gfx/cards/' + topStackCard.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + '.png')}
+            alt="deck card"
+            onClick={() => { handleClick() }}
           />
         </div>
       }
       <img
-        className='w-[50px] sm:w-[60px] xs:w-[80px] rounded-md'
+        className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md'
         style={deckStyle}
         src={require('../img/gfx/cards/back-playing.png')}
         alt="deck card"

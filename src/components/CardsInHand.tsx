@@ -12,14 +12,11 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
 
   const divWidth = (cardsElement != null) ? cardsElement.offsetWidth : 0 // total width of the main container
 
-  let cardWidth = 50 // width of one card
-  if (divWidth <= 200) {
-    cardWidth = 50
-  } else if (divWidth > 200 && divWidth <= 250) {
-    cardWidth = 60
-  } else {
-    cardWidth = 80
-  }
+  let cardWidth = 38
+  const baseCardSize = document.getElementById('top-player-character')?.offsetWidth
+  if (baseCardSize === 38) cardWidth = 46
+  if (baseCardSize === 60) cardWidth = 60
+  if (baseCardSize === 80) cardWidth = 80
 
   const cardsWidth = numberOfCards * cardWidth // width of all cards in hand
 
@@ -29,17 +26,18 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
   }
 
   return (
-    <div id={`cards-${oponentName}`} className='max-h-full w-full flex justify-center'>
-      <div className='max-h-full w-full flex relative'>
+    <div id={`cards-${oponentName}`} className='max-h-full h-[94px] sm:h-full w-full flex justify-center items-start'>
+      <div className='flex'>
         {
           cardsInHand.map((card, index) => {
             return (
-            // unknown card
+              // unknown card
               <img
                 id='card'
                 key={index}
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                 style={{ transform: `translate(${dx * index}px, 0)`, width: `${cardWidth}px` }}
-                className='translate-x-[-0px]'
+                className='object-contain'
                 src={require('../img/gfx/cards/back-playing.png')} alt="" />
             )
           })}
