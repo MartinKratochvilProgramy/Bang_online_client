@@ -49,7 +49,7 @@ export const Game = () => {
   const activeCard = useAppSelector(selectActiveCard)
   const myHand = useAppSelector(selectMyHand)
 
-  const [isVerticalMobile, setIsVerticalMobile] = useState(false)
+  const [isVerticalMobile, setIsVerticalMobile] = useState(true)
 
   const dispatch = useAppDispatch()
 
