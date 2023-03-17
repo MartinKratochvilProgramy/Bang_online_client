@@ -216,7 +216,7 @@ export const Game = () => {
     <div id='game'>
       {characterChoiceInProgress
         ? <div
-          className='fixed flex flex-col items-center justify-center top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] m-auto space-y-4 xs:space-y-8'
+          className='flex flex-col items-center justify-center m-auto space-y-8 xs:space-y-16'
           id="character-choice">
           <CharacterChoice />
           <Chat width={260} />

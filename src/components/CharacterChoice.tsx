@@ -22,7 +22,7 @@ export const CharacterChoice = () => {
 
   return (
     <div>
-      <div className='text-3xl xs:text-6xl font-rye my-6 text-white'>
+      <div className='text-3xl xs:text-6xl font-rye my-6 md:my-12 text-white'>
         {character === '' ? 'Pick a character' : 'Waiting for other players...'}
       </div>
       <div className='flex justify-center space-x-4'>
@@ -35,7 +35,7 @@ export const CharacterChoice = () => {
           }
           return (
             <img
-              className='w-[185px] xs:w-[260px] rounded-3xl hover:shadow-2xl cursor-pointer'
+              className='w-[125px] sm:w-[185px] xs:w-[260px] rounded-3xl hover:shadow-2xl cursor-pointer'
               src={characterSource}
               key={characterChoice}
               style={styles}
