@@ -52,16 +52,15 @@ export const Chat: React.FC<Props> = ({ width }) => {
     <div className='w-[280px] xs:w-[440px]'>
       <pre
         id="text"
-        className={'bg-beige ml-0 rounded p-2 text-start text-sm xs:text-md overflow-auto w-full h-[120px] xs:h-[200px] font-rye'}
-        // value={messagesOutput}
+        className='bg-beige ml-0 rounded p-2 text-start text-sm xs:text-md overflow-y-auto overflow-x-clip w-full h-[120px] xs:h-[200px] font-rye break-words'
       >
         {messages.map((message, index) => {
           return (
             <div key={index} className='flex flex-row w-full text-start'>
-              <div className=''>
+              <div>
                 {message.username}:
               </div>
-              <div className='text-gray-700 ml-2'>
+              <div className='text-gray-700 ml-2 break-all whitespace-normal w-full'>
                 {message.message}
               </div>
             </div>
