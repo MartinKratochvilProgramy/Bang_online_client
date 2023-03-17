@@ -92,7 +92,7 @@ export const StackDeck = () => {
         >
           <img
             className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md'
-            style={deckStyle}
+            style={stackStyle}
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             src={require('../img/gfx/cards/' + topStackCard.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + '.png')}
             alt="deck card"
