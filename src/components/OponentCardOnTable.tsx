@@ -3,6 +3,7 @@ import { useAppSelector } from '../app/hooks'
 import { selectPlayersInRange } from '../features/playersInRangeSlice'
 import { selectSelectCardTarget } from '../features/selectCardTargetSlice'
 import { type CardI } from '../types/card'
+import { parseCardType } from './Card'
 
 interface Props {
   card: CardI
@@ -34,9 +35,10 @@ export const OponentCardOnTable: React.FC<Props> = ({ card, oponentName, confirm
         <div className='text-xl'>
           {card.name}
         </div>
-        <div className='text-xs'>
-          {card.digit} {card.type}
-        </div>
+        <div
+          className='text-md flex w-full justify-center items-center space-x-1'
+          dangerouslySetInnerHTML={{ __html: `${card.digit} ${parseCardType(card.type)}` }}
+        />
       </div>
     </button>
   )

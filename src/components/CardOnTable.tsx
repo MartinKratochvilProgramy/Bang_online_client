@@ -6,6 +6,7 @@ import { selectUsername } from '../features/usernameSlice'
 
 import { socket } from '../socket'
 import { type CardI } from '../types/card'
+import { parseCardType } from './Card'
 
 interface Props {
   card: CardI
@@ -54,9 +55,10 @@ export const CardOnTable: React.FC<Props> = ({ card, confirmCardTarget }) => {
         <div className='text-xl'>
           {card.name}
         </div>
-        <div className='text-xs'>
-          {card.digit} {card.type}
-        </div>
+        <div
+          className='text-md flex w-full justify-center items-center space-x-1'
+          dangerouslySetInnerHTML={{ __html: `${card.digit} ${parseCardType(card.type)}` }}
+        />
       </div>
     </button>
   )

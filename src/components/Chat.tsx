@@ -14,8 +14,6 @@ interface Props {
 
 export const Chat: React.FC<Props> = ({ width }) => {
   const [messageInput, setMessageInput] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [messagesOutput, setMessagesOutput] = useState('')
 
   const messages = useAppSelector(selectMessages)
   const username = useAppSelector(selectUsername)
@@ -28,12 +26,6 @@ export const Chat: React.FC<Props> = ({ width }) => {
   }
 
   useEffect(() => {
-    let messagesFormatted = ''
-    for (let i = 0; i < messages.length; i++) {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      messagesFormatted += `${messages[i].username} : ${messages[i].message}\n`
-    }
-    setMessagesOutput(messagesFormatted)
     const textArea = document.getElementById('text')
     if (textArea !== null) textArea.scrollTop = textArea.scrollHeight
   }, [messages])
@@ -87,7 +79,7 @@ export const Chat: React.FC<Props> = ({ width }) => {
             <Button
               onClick={() => { }}
               value={'Send'}
-              size={1}
+              size={window.innerWidth > 600 ? 1.5 : 1}
             />
           </div>
 

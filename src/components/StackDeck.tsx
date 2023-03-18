@@ -12,6 +12,7 @@ import { type CardI } from '../types/card'
 import { selectCharacter } from '../features/characterSlice'
 
 import { socket } from '../socket'
+import { parseCardType } from './Card'
 
 export const StackDeck = () => {
   const username = useAppSelector(selectUsername)
@@ -87,7 +88,7 @@ export const StackDeck = () => {
       {(topStackCard != null && topStackCard !== undefined) &&
         <div
           style={stackStyle}
-          className='rounded-md'
+          className='rounded-md group relative'
           onClick={() => { getTopStackCard() }}
         >
           <img
@@ -98,6 +99,15 @@ export const StackDeck = () => {
             alt="deck card"
             onClick={() => { handleClick() }}
           />
+          <div className='hidden p-1 z-40 font-rye absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[60px] group-hover:flex group-hover:flex-col group-hover:justify-center bg-transparentBlack text-white'>
+            <div className='text-xl'>
+              {topStackCard.name}
+            </div>
+            <div
+              className='text-md flex w-full justify-center items-center space-x-1'
+              dangerouslySetInnerHTML={{ __html: `${topStackCard.digit} ${parseCardType(topStackCard.type)}` }}
+            />
+          </div>
         </div>
       }
       <img

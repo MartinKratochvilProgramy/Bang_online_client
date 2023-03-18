@@ -1,8 +1,6 @@
 import React from 'react'
 import { type CardI } from '../types/card'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-
-import { socket } from '../socket'
 import { selectDiscarding } from '../features/discardingSlice'
 import { selectMyHand, setMyHandNotPlayable } from '../features/myHandSlice'
 import { selectMyHealth } from '../features/myHealthSlice'
@@ -17,6 +15,17 @@ import { setSelectPlayerTargetFalse, setSelectPlayerTargetTrue } from '../featur
 import { setSelectCardTargetFalse, setSelectCardTargetTrue } from '../features/selectCardTargetSlice'
 import { setIsLosingHealthFalse } from '../features/isLosingHealthSlice'
 import { setActiveCard } from '../features/activeCardSlice'
+
+import { socket } from '../socket'
+
+export function parseCardType (cardType: string) {
+  // converts cardType string into card sign
+  if (cardType === 'hearts') { return '&#9829;' }
+  if (cardType === 'diamonds') { return '&#9830;' }
+  if (cardType === 'clubs') { return '&#9827;' }
+  if (cardType === 'spades') { return '&#9824;' }
+  return ''
+}
 
 interface Props {
   card: CardI
@@ -176,9 +185,10 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
         <div className='text-xl'>
           {cardName}
         </div>
-        <div className='text-xs'>
-          {cardDigit} {cardType}
-        </div>
+        <div
+          className='text-md flex w-full justify-center items-center space-x-1'
+          dangerouslySetInnerHTML={{ __html: `${cardDigit} ${parseCardType(cardType)}` }}
+        />
       </div>
     </button>
   )
