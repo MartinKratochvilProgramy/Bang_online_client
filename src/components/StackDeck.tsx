@@ -93,11 +93,9 @@ export const StackDeck = () => {
         >
           <img
             className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md'
-            style={stackStyle}
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             src={require('../img/gfx/cards/' + topStackCard.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '') + '.png')}
             alt="deck card"
-            onClick={() => { handleClick() }}
           />
           <div className='hidden p-1 z-40 font-rye absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[60px] group-hover:flex group-hover:flex-col group-hover:justify-center bg-transparentBlack text-white'>
             <div className='text-xl'>

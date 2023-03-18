@@ -105,6 +105,7 @@ export const Game = () => {
       if (username === '') return
       if (currentRoom === null) return
       dispatch(setCurrentPlayer(playerName))
+      dispatch(setActionMessage(''))
       socket.emit('get_my_hand', { username, currentRoom })
     })
 

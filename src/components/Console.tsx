@@ -26,10 +26,10 @@ export const Console = () => {
         // set actionMessage if action req from player
         if (username !== null && (
           message.includes('on ' + username) ||
-          message.includes('Bang!') ||
-          message.includes('Duel') ||
-          message.includes('Gatling') ||
-          message.includes('Indiani')
+          message.includes('used Bang!') ||
+          message.includes('used Duel') ||
+          message.includes('used Gatling') ||
+          message.includes('used Indiani')
         )) {
           let [_body, target] = message.split('on ')
           let [actor, body] = _body.split(' used')
