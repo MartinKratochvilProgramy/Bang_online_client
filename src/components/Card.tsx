@@ -18,6 +18,7 @@ import { setActiveCard } from '../features/activeCardSlice'
 import { selectActionMessage, setActionMessage } from '../features/actionMessageSlice'
 
 import { socket } from '../socket'
+import { selectCharacterUsable, setCharacterUsableFalse } from '../features/characterUsableSlice'
 
 export function parseCardType (cardType: string) {
   // converts cardType string into card sign
@@ -39,6 +40,7 @@ interface Props {
 export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard, stackCard, onClick }) => {
   const username = useAppSelector(selectUsername)
   const character = useAppSelector(selectCharacter)
+  const characterUsable = useAppSelector(selectCharacterUsable)
   const currentRoom = useAppSelector(selectCurrentRoom)
   const discarding = useAppSelector(selectDiscarding)
   const myHand = useAppSelector(selectMyHand)
@@ -79,6 +81,10 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
 
     dispatch(setSelectPlayerTargetFalse())
     dispatch(setSelectCardTargetFalse())
+    // player can decide not to use Jourdonnais
+    if (character === 'Jourdonnais' && characterUsable) {
+      dispatch(setCharacterUsableFalse())
+    }
 
     if (cardName === 'Bang!') {
       if (username !== currentPlayer && !indianiActive && !duelActive && character === 'Calamity Janet') {

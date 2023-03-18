@@ -80,6 +80,11 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
     dispatch(setMyHandNotPlayable())
     dispatch(setActionMessage(''))
 
+    // player can decide not to use Jourdonnais
+    if (character === 'Jourdonnais' && characterUsable) {
+      dispatch(setCharacterUsableFalse())
+    }
+
     socket.emit('lose_health', { username, currentRoom })
   }
 
