@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { setActionMessage } from '../features/actionMessageSlice'
+import { selectCurrentPlayer } from '../features/currentPlayerSlice'
 import { selectUsername } from '../features/usernameSlice'
 
 import { socket } from '../socket'
 
 export const Console = () => {
   const username = useAppSelector(selectUsername)
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
 
   const dispatch = useAppDispatch()
 
@@ -25,11 +27,11 @@ export const Console = () => {
 
         // set actionMessage if action req from player
         if (username !== null && (
-          message.includes('on ' + username) ||
-          message.includes('used Bang!') ||
-          message.includes('used Duel') ||
+          (message.includes('used Bang!') && (!message.includes('Indiani') && !message.includes('Gatling') && !message.includes('duel'))) ||
+          (message.includes('used Duel') && message.includes(`on ${username}`)) ||
           message.includes('used Gatling') ||
-          message.includes('used Indiani')
+          message.includes('used Indiani') ||
+          (message.includes('Dynamite exploded!') && (currentPlayer === username))
         )) {
           let [_body, target] = message.split('on ')
           let [actor, body] = _body.split(' used')
