@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useAppSelector } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { setActionMessage } from '../features/actionMessageSlice'
 import { selectUsername } from '../features/usernameSlice'
 
 import { socket } from '../socket'
 
 export const Console = () => {
   const username = useAppSelector(selectUsername)
+
+  const dispatch = useAppDispatch()
 
   const [consoleOutput, setConsoleOutput] = useState<string[]>([])
 
@@ -19,6 +22,23 @@ export const Console = () => {
           .replace('clubs', '&#9827;')
           .replace('spades', '&#9824;')
         setConsoleOutput(consoleOutput => [...consoleOutput, messageFormatted])
+
+        // set actionMessage if action req from player
+        if (username !== null && (
+          message.includes('on ' + username) ||
+          message.includes('Bang!') ||
+          message.includes('Duel') ||
+          message.includes('Gatling') ||
+          message.includes('Indiani')
+        )) {
+          let [_body, target] = message.split('on ')
+          let [actor, body] = _body.split(' used')
+
+          target !== undefined ? target = 'on ' + target.replace(username, 'you') : target = ''
+          actor !== undefined ? actor = actor.replace(username, 'You') + ' used' : target = ''
+
+          dispatch(setActionMessage(actor + body + target + '!'))
+        }
       }
     })
 
@@ -35,10 +55,13 @@ export const Console = () => {
   return (
     <div
       id='console-output'
-      className='bg-beige rounded w-[200px] sm:w-[280px] xs:w-[320px] p-2 text-sm xs:text-md overflow-auto h-[120px] xs:h-[240px]'>
+      className='bg-beige rounded w-[200px] sm:w-[280px] xs:w-[440px] p-2 text-sm xs:text-md overflow-auto h-[120px] sm:h-[160px] xs:h-[200px]'>
       {consoleOutput.map((message, index) => {
         let additionalStyles = {}
-        if (username !== null && message.includes(username)) {
+        if (username !== null && (
+          message.includes(' ' + username) ||
+          message.includes(username + ' ') // this is here because the check would catch usernames inside words (username: B is in Bang! etc.)
+        )) {
           additionalStyles = {
             fontWeight: 'bold'
           }

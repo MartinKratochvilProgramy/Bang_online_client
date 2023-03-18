@@ -7,6 +7,3 @@ const route = 'bangonlineserver-production.up.railway.app'
 export const socket = ioc(route, {
   parser: customParser
 })
-
-// bangonlineserver-production.up.railway.app
-// http://localhost:3001

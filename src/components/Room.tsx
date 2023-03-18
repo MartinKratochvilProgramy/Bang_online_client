@@ -56,7 +56,7 @@ export const Room = () => {
       }
 
       <div className='flex justify-center mt-8'>
-        <Chat width={480} />
+        <Chat />
       </div>
     </div>
   )

@@ -15,6 +15,7 @@ import { setSelectPlayerTargetFalse, setSelectPlayerTargetTrue } from '../featur
 import { setSelectCardTargetFalse, setSelectCardTargetTrue } from '../features/selectCardTargetSlice'
 import { setIsLosingHealthFalse } from '../features/isLosingHealthSlice'
 import { setActiveCard } from '../features/activeCardSlice'
+import { selectActionMessage, setActionMessage } from '../features/actionMessageSlice'
 
 import { socket } from '../socket'
 
@@ -45,6 +46,7 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const indianiActive = useAppSelector(selectIndianiActive)
   const duelActive = useAppSelector(selectDuelActive)
+  const actionMessage = useAppSelector(selectActionMessage)
 
   const dispatch = useAppDispatch()
 
@@ -57,6 +59,10 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
     if (onClick !== undefined) {
       onClick()
       return
+    }
+
+    if (actionMessage !== '') {
+      dispatch(setActionMessage(''))
     }
 
     if (discarding) {

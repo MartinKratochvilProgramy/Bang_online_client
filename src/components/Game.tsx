@@ -34,6 +34,7 @@ import { Oponents } from './Oponents'
 import { selectCharacter } from '../features/characterSlice'
 import { setDeckActiveTrue } from '../features/deckActiveSlice'
 import { setMyDrawChoice } from '../features/myDrawChoice'
+import { setActionMessage } from '../features/actionMessageSlice'
 
 import { socket } from '../socket'
 
@@ -59,8 +60,10 @@ export const Game = () => {
     for (const player of playersLosingHealth) {
       if (player.isLosingHealth) {
         dispatch(setNextTurnFalse())
+        return
       }
     }
+    dispatch(setActionMessage(''))
   }, [playersLosingHealth])
 
   useEffect(() => {
@@ -240,7 +243,7 @@ export const Game = () => {
           className='flex flex-col items-center justify-center m-auto space-y-8 xs:space-y-16'
           id="character-choice">
           <CharacterChoice />
-          <Chat width={260} />
+          <Chat />
         </div>
         : <>
           <div id='oponents' className='fixed z-[30]'>
@@ -255,7 +258,7 @@ export const Game = () => {
           </div>
 
           <div className='fixed flex justify-between items-end bottom-0 left-0 right-0 z-[50]'>
-            {isVerticalMobile && <Chat width={260} />}
+            {isVerticalMobile && <Chat />}
             <PlayerTable
               predictUseCard={predictUseCard}
               confirmCardTarget={confirmCardTarget}

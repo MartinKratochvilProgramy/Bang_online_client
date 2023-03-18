@@ -33,6 +33,7 @@ import isLosingHealthSlice from '../features/isLosingHealthSlice'
 import selectCardTargetSlice from '../features/selectCardTargetSlice'
 import activeCardSlice from '../features/activeCardSlice'
 import winnerSlice from '../features/winnerSlice'
+import actionMessageSlice from '../features/actionMessageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -69,7 +70,8 @@ export const store = configureStore({
     isLosingHealth: isLosingHealthSlice,
     selectCardTarget: selectCardTargetSlice,
     activeCard: activeCardSlice,
-    winner: winnerSlice
+    winner: winnerSlice,
+    actionMessage: actionMessageSlice
   }
 })
 

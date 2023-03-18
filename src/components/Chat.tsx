@@ -8,11 +8,7 @@ import { Button } from './Button'
 
 import { socket } from '../socket'
 
-interface Props {
-  width: number
-}
-
-export const Chat: React.FC<Props> = ({ width }) => {
+export const Chat = () => {
   const [messageInput, setMessageInput] = useState('')
 
   const messages = useAppSelector(selectMessages)

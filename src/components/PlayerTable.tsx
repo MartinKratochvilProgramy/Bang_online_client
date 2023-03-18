@@ -25,6 +25,7 @@ import { CardOnTable } from './CardOnTable'
 import { selectCharacter } from '../features/characterSlice'
 
 import { socket } from '../socket'
+import { selectActionMessage, setActionMessage } from '../features/actionMessageSlice'
 
 interface Props {
   predictUseCard: (cardName: string, cardDigit: number, cardType: string) => void
@@ -49,6 +50,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
   const selectPlayerTarget = useAppSelector(selectSelectPlayerTarget)
   const discarding = useAppSelector(selectDiscarding)
   const isLosingHealth = useAppSelector(selectIsLosingHealth)
+  const actionMessage = useAppSelector(selectActionMessage)
 
   const dispatch = useAppDispatch()
 
@@ -76,6 +78,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
     dispatch(setCharacterUsableFalse())
     dispatch(setIsLosingHealthFalse())
     dispatch(setMyHandNotPlayable())
+    dispatch(setActionMessage(''))
 
     socket.emit('lose_health', { username, currentRoom })
   }
@@ -84,6 +87,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
     dispatch(setSelectPlayerTargetFalse())
     dispatch(setSelectCardTargetFalse())
     dispatch(setDeckActiveFalse())
+    dispatch(setActionMessage(''))
 
     if (myHand.length > myHealth) {
       dispatch(setDiscardingTrue())
@@ -161,7 +165,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
         })}
       </div>
       <div
-        className='flex justify-between items-end mx-1 sm:mx-4 h-[94px] sm:h-[135px] xs:h-[176px] bg-beige rounded p-1 sm:p-2 pt-2 sm:pt-3 relative font-rye'
+        className='flex justify-between items-end mx-1 sm:mx-4 h-[94px] sm:h-[135px] xs:h-[176px] bg-beige rounded p-1 sm:p-2 pt-1 sm:pt-1 relative font-rye'
       >
         <div className='flex min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] flex-col text-[10px] xs:text-sm items-start'>
           <div className='flex flex-col justify-start items-start'>
@@ -203,21 +207,25 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
           </div>
         }
 
-        <div className='max-h-full w-full h-full overflow-y-auto flex flex-wrap justify-center items-center'>
-          {myHand.map(card => {
-            return (
-              <Card
-                card={card}
-                predictUseCard={predictUseCard}
-                predictUseBlueCard={predictUseBlueCard}
-                key={`${card.name}-${card.digit}-${card.type}`}
-              />
-            )
-          })}
-
+        <div className='w-full h-full justify-center items-center'>
+          <div className='flex w-full min-h-[14px] sm:min-h-[28px] justify-center items-center text-red-900 text-[10px] sm:text-sm md:text-lg'>
+            {actionMessage}
+          </div>
+          <div className='overflow-y-auto flex h-full justify-center items-start flex-wrap'>
+            {myHand.map(card => {
+              return (
+                <Card
+                  card={card}
+                  predictUseCard={predictUseCard}
+                  predictUseBlueCard={predictUseBlueCard}
+                  key={`${card.name}-${card.digit}-${card.type}`}
+                />
+              )
+            })}
+          </div>
         </div>
 
-        <div className='flex flex-col justify-start h-full w-[120px] px-1 py-0 space-y-2'>
+        <div className='flex flex-col justify-start h-full w-[120px] px-1 py-0 space-y-2 sm:pt-2'>
           {(currentPlayer === username && nextTurn && !characterUsable && emporioState.length === 0 && !(myDrawChoice.length > 0)) && <Button onClick={endTurn} value={'End turn'} size={1.2} />}
           {(selectPlayerTarget && nextTurn && currentPlayer === username) && <Button onClick={cancelTargetSelect} value={'Cancel'} size={1.2} /> }
           {discarding && <Button onClick={() => { dispatch(setDiscardingFalse()) }} value={'Cancel'} size={1.2} />}
