@@ -93,7 +93,9 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
           </img>
         </div>
 
-        <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
+        <div className='flex h-full justify-start items-end'>
+          <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
+        </div>
       </div>
     </div>
   )

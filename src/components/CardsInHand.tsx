@@ -26,7 +26,7 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
   }
 
   return (
-    <div id={`cards-${oponentName}`} className='max-h-full h-[94px] sm:h-full w-full flex justify-center items-start'>
+    <div id={`cards-${oponentName}`} className=''>
       <div className='flex'>
         {
           cardsInHand.map((card, index) => {
