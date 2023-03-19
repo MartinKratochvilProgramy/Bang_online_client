@@ -26,20 +26,39 @@ export const Console = () => {
         setConsoleOutput(consoleOutput => [...consoleOutput, messageFormatted])
 
         // set actionMessage if action req from player
-        if (username !== null && (
-          (message.includes('used Bang!') && (!message.includes('Indiani') && !message.includes('Gatling') && !message.includes('duel'))) ||
-          (message.includes('used Duel') && message.includes(`on ${username}`)) ||
-          message.includes('used Gatling') ||
-          message.includes('used Indiani') ||
-          (message.includes('Dynamite exploded!') && (currentPlayer === username))
-        )) {
-          let [_body, target] = message.split('on ')
-          let [actor, body] = _body.split(' used')
+        if (username !== null) {
+          if (
+            (message.includes('used Bang!') && (!message.includes('Indiani') && !message.includes('Gatling') && !message.includes('Duel'))) ||
+            (message.includes('used Duel') && message.includes(`on ${username}`)) ||
+            message.includes('used Gatling') ||
+            message.includes('used Indiani') ||
+            message.includes('used Cat Balou') ||
+            message.includes('used Panico')
+          ) {
+            // replace username with 'You'
+            // the splitting in code is done because username could for ex.
+            // be 'a' and this would replace inside 'Bang!' -> 'BYoung! etc.
+            let [_body, target] = message.split('on ')
+            let [actor, body] = _body.split(' used')
 
-          target !== undefined ? target = 'on ' + target.replace(username, 'you') : target = ''
-          actor !== undefined ? actor = actor.replace(username, 'You') + ' used' : target = ''
+            target !== undefined ? target = 'on ' + target.replace(username, 'you') : target = ''
+            actor !== undefined ? actor = actor.replace(username, 'You') + ' used' : target = ''
 
-          dispatch(setActionMessage(actor + body + target + '!'))
+            dispatch(setActionMessage(actor + body + target + '!'))
+          }
+
+          if (message.includes('in Duel with')) {
+            // this is to display oponnent Bang! action in duel
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const [currentDuelPlayer, body] = message.split(' used')
+            if (currentDuelPlayer !== username) {
+              dispatch(setActionMessage(`${currentDuelPlayer} used Bang!`))
+            }
+          }
+
+          if ((message.includes('Dynamite exploded!') && (currentPlayer === username))) {
+            dispatch(setActionMessage(message))
+          }
         }
       }
     })

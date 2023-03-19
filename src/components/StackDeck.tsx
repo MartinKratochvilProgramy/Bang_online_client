@@ -10,9 +10,9 @@ import { setNextTurnTrue } from '../features/nextTurnSlice'
 import { selectTopStackCard, setTopStackCard, setTopStackCardNotActive } from '../features/topStackCardSlice'
 import { type CardI } from '../types/card'
 import { selectCharacter } from '../features/characterSlice'
+import { parseCardType } from './Card'
 
 import { socket } from '../socket'
-import { parseCardType } from './Card'
 
 export const StackDeck = () => {
   const username = useAppSelector(selectUsername)
