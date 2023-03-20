@@ -18,6 +18,7 @@ export const Console = () => {
     socket.on('console', (consoleMessage: string[]) => {
       for (let i = 0; i < consoleMessage.length; i++) {
         const message = consoleMessage[i]
+        // parse message, so it would display card symbols
         const messageFormatted = message
           .replace('hearts', '&#9829;')
           .replace('diamonds', '&#9830;')

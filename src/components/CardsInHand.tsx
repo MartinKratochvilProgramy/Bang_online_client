@@ -14,7 +14,7 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
 
   let cardWidth = 38
   const baseCardSize = document.getElementById('top-player-character')?.offsetWidth
-  if (baseCardSize === 38) cardWidth = 46
+  if (baseCardSize === 38) cardWidth = 38
   if (baseCardSize === 60) cardWidth = 60
   if (baseCardSize === 80) cardWidth = 80
 
