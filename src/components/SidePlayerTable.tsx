@@ -60,9 +60,9 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
         })}
       </div>
       <div
-        className='flex justify-between items-end mx-4 h-[145px] xs:h-[176px] bg-beige rounded p-2 relative'
+        className='flex justify-between items-end mx-4 h-[105px] sm:h-[145px] xs:h-[176px] bg-beige rounded p-2 relative'
       >
-        <div className='flex w-auto min-w-[60px] xs:min-w-[80px] text-sm flex-col items-start font-rye'>
+        <div className='flex w-auto min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] text-xs xs:text-sm flex-col items-start font-rye'>
           <div className='overflow-visible'>{oponentName}</div>
           <div>HP: {health}</div>
           <div className='relative flex justify-center group'>
@@ -70,7 +70,7 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
               src={characterSource}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
-              className='w-[60px] xs:w-[80px] rounded-md ml-2 mr-4'
+              className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md ml-2 mr-4'
               alt="Player character">
             </img>
             <div
@@ -86,14 +86,14 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
           </div>
         </div>
 
-        <div className='flex w-auto min-w-[70px] xs:min-w-[90px] relative group'>
+        <div className='flex w-auto min-w-[38px] sm:min-w-[70px] xs:min-w-[90px] relative group'>
           <img
-            className='w-[60px] xs:w-[80px]'
+            className='w-[38px] sm:w-[60px] xs:w-[80px]'
             src={roleSource} alt="">
           </img>
         </div>
 
-        <div className='flex h-full justify-start items-end'>
+        <div className='flex h-full justify-start items-end ml-1'>
           <CardsInHand oponentName={oponentName} cardsInHand={cardsInHand} />
         </div>
       </div>
