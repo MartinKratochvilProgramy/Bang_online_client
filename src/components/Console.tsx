@@ -28,7 +28,7 @@ export const Console = () => {
         // set actionMessage if action req from player
         if (username !== null) {
           if (
-            (message.includes('used Bang!') && (!message.includes('Indiani') && !message.includes('Gatling') && !message.includes('Duel'))) ||
+            (message.includes(`used Bang! on ${username}`) && (!message.includes('Indiani') && !message.includes('Gatling') && !message.includes('Duel'))) ||
             (message.includes('used Duel') && message.includes(`on ${username}`)) ||
             message.includes('used Gatling') ||
             message.includes('used Indiani') ||
