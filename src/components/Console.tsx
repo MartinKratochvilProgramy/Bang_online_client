@@ -33,8 +33,8 @@ export const Console = () => {
             (message.includes('used Duel') && message.includes(`on ${username}`)) ||
             message.includes('used Gatling') ||
             message.includes('used Indiani') ||
-            message.includes('used Cat Balou') ||
-            message.includes('used Panico')
+            message.includes(`used Cat Balou on ${username}`) ||
+            message.includes(`used Panico on ${username}`)
           ) {
             // replace username with 'You'
             // the splitting in code is done because username could for ex.
