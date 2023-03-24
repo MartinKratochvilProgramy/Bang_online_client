@@ -158,7 +158,10 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
 
   return (
     <div className='relative max-w-[600px] xs:max-w-[900px] w-full'>
-      <div className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-56px] sm:translate-y-[-94px] xs:translate-y-[-130px]'>
+      <div
+        className='absolute mb-1 xs:mb-2 space-x-2 flex justify-center left-[50%] translate-x-[-50%] translate-y-[-56px] sm:translate-y-[-94px] xs:translate-y-[-130px]'
+        id='player-table'
+      >
         {table.map(card => {
           return (
             <CardOnTable
@@ -180,9 +183,12 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
           <div className='relative group'>
             <img
               src={characterSource}
+              id={character}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
-              className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md mr-4' alt="Player character">
+              className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md mr-4'
+              alt="Player character"
+            >
             </img>
             <div className='hidden p-1 rounded group-hover:flex group-hover:flex-col group-hover:justify-center top-[-86px] left-[-60px] w-[200px] mx-auto bg-transparentBlack text-white absolute'>
               <div className='text-xl'>
@@ -216,7 +222,10 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
           <div className='flex w-full min-h-[14px] sm:min-h-[28px] justify-center items-center text-red-900 text-[10px] sm:text-sm md:text-lg'>
             {actionMessage}
           </div>
-          <div className='overflow-y-auto flex h-full justify-center items-start flex-wrap'>
+          <div
+            className='overflow-y-auto flex h-full justify-center items-start flex-wrap'
+            id='player-hand'
+          >
             {myHand.map(card => {
               return (
                 <Card

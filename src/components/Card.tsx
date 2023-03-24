@@ -190,8 +190,10 @@ export const Card: React.FC<Props> = ({ card, predictUseCard, predictUseBlueCard
   return (
     <button
       onClick={handleClick}
+      id={card.name}
       style={styles}
-      className='w-[46px] sm:w-[60px] xs:w-[80px] h-[72px] sm:h-[93px] xs:h-[124px] rounded-md group flex flex-row justify-center'>
+      className='w-[46px] sm:w-[60px] xs:w-[80px] h-[72px] sm:h-[93px] xs:h-[124px] rounded-md group flex flex-row justify-center'
+    >
       <img src={cardSource} alt="" />
       <div className='hidden p-1 z-40 font-rye absolute group-hover:flex group-hover:flex-col group-hover:justify-center translate-y-[-60px] bg-transparentBlack text-white'>
         <div className='text-xl'>

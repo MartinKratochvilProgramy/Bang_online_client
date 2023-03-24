@@ -47,6 +47,7 @@ export const CardOnTable: React.FC<Props> = ({ card, confirmCardTarget }) => {
 
   return (
     <button
+      id={card.name}
       onClick={() => { playCardOnTable() }}
       style={styles}
       className='w-[36px] sm:w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>

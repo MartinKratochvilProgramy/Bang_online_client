@@ -65,6 +65,7 @@ export const TopPlayerTable: React.FC<Props> = ({
           </div>
           <div className='flex justify-center group'>
             <img
+              id={'oponent-' + oponentName}
               src={characterSource}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
