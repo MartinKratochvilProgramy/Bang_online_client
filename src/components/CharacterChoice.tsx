@@ -38,8 +38,9 @@ export const CharacterChoice = () => {
               className='w-[125px] sm:w-[185px] xs:w-[260px] rounded-1xl sm:rounded-2xl hover:shadow-2xl cursor-pointer'
               src={characterSource}
               key={characterChoice}
+              id={characterChoice}
               style={styles}
-              alt="deck card"
+              alt="Character card"
               onClick={() => { chooseCharacter(characterChoice) }}
             />
           )

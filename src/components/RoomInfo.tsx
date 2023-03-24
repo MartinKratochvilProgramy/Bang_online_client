@@ -39,7 +39,7 @@ export const RoomInfo: React.FC<Props> = ({ room }) => {
           {room.numOfPlayers}/6
         </div>
       </div>
-      {(!room.gameActive && room.numOfPlayers < 6) && <Button onClick={joinRoom} value={'JOIN !'} size={1.5} />}
+      {(!room.gameActive && room.numOfPlayers < 6) && <Button onClick={joinRoom} value={'Join'} size={1.5} />}
       {room.gameActive && <p className='text-gray-700'>In progress</p>}
       {(room.numOfPlayers >= 6 && !room.gameActive) && <p className='text-gray-700'>Room full</p>}
 

@@ -47,6 +47,7 @@ export const RoomCreate = () => {
       <br />
       <input
         className='shadow appearance-none h-[43px] font-rye text-xl rounded bg-beige mt-1 mb-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+        id='room-name-input'
         placeholder="Room name..."
         onChange={(e) => { setRoomInput(e.target.value) }}
         maxLength={21}
@@ -55,7 +56,7 @@ export const RoomCreate = () => {
       <br />
       <Button
         onClick={handleSubmit}
-        value={'CREATE !'}
+        value={'Create room'}
         size={2}
       />
     </form>
