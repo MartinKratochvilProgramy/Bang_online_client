@@ -19,7 +19,7 @@ export const UsernameSelect = () => {
       className='mt-4 xs:mt-24'
     >
       <label className="text-outline font-rye text-6xl text-white mb-6">
-                Select username
+        Select username
       </label>
       <br />
       <div className='mt-4'>

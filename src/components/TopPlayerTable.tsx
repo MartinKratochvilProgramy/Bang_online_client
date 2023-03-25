@@ -69,7 +69,7 @@ export const TopPlayerTable: React.FC<Props> = ({
               src={characterSource}
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
-              className='w-[38px] sm:w-[60px] xs:w-[80px]  rounded-md mr-2' alt="Player character">
+              className='w-[38px] sm:w-[60px] xs:w-[80px]  rounded-md mr-2' alt="Oponent player character">
             </img>
             <div className='hidden p-1 rounded group-hover:flex group-hover:flex-col group-hover:justify-center top-[96px] xs:top-[126px] w-[200px] mx-auto bg-transparentBlack text-white absolute'>
               <div className='text-xl'>

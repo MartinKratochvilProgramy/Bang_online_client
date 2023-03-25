@@ -71,7 +71,7 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
               style={characterStyles}
               onClick={() => { handleCharacterClick() }}
               className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md ml-2 mr-4'
-              alt="Player character">
+              alt="Oponent player character">
             </img>
             <div
               style={{ rotate: `${rotateDescription}deg` }}
