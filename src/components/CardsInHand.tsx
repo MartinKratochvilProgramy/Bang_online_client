@@ -26,22 +26,21 @@ export const CardsInHand: React.FC<Props> = ({ oponentName, cardsInHand }) => {
   }
 
   return (
-    <div id={`cards-${oponentName}`} className=''>
-      <div className='flex'>
-        {
-          cardsInHand.map((card, index) => {
-            return (
-              // unknown card
-              <img
-                id='card'
-                key={index}
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                style={{ transform: `translate(${dx * index}px, 0)`, width: `${cardWidth}px` }}
-                className='object-contain'
-                src={require('../img/gfx/cards/back-playing.png')} alt="" />
-            )
-          })}
-      </div>
+    <div
+      id={`cards-${oponentName}`} className='flex'>
+      {
+        cardsInHand.map((card, index) => {
+          return (
+          // unknown card
+            <img
+              id='card'
+              key={index}
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+              style={{ transform: `translate(${dx * index}px, 0)`, width: `${cardWidth}px` }}
+              className='object-contain'
+              src={require('../img/gfx/cards/back-playing.png')} alt="" />
+          )
+        })}
     </div>
   )
 }

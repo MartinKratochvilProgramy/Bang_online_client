@@ -29,7 +29,9 @@ export const OponentCardOnTable: React.FC<Props> = ({ card, oponentName, confirm
     <button
       onClick={() => { confirmCardTarget(card.name, card.digit, card.type, oponentName) }}
       style={styles}
-      className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'>
+      className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md group flex flex-row justify-center'
+      id={card.name}
+    >
       <img src={cardSource} alt="" />
       <div className='hidden p-1 font-rye absolute rounded group-hover:flex group-hover:flex-col group-hover:justify-center translate-y-[-60px] bg-transparentBlack text-white'>
         <div className='text-xl'>
