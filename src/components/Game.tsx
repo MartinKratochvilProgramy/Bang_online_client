@@ -163,6 +163,7 @@ export const Game = () => {
         if (characterName === 'Jesse Jones') {
           dispatch(setSelectPlayerTargetTrue())
           dispatch(setDeckActiveTrue())
+          dispatch(setNextTurnFalse())
           socket.emit('request_players_in_range', { range: 'max', currentRoom, username })
         } else if (characterName === 'Pedro Ramirez') {
           dispatch(setDeckActiveTrue())

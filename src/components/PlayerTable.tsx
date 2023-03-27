@@ -178,7 +178,7 @@ export const PlayerTable: React.FC<Props> = ({ predictUseCard, confirmCardTarget
         <div className='flex min-w-[38px] sm:min-w-[60px] xs:min-w-[80px] flex-col text-[10px] xs:text-sm items-start'>
           <div className='flex flex-col justify-start items-start'>
             <div className='overflow-hidden'>{username}</div>
-            <div className=''>HP: {myHealth}</div>
+            <div>HP: <span id='player-health'>{myHealth}</span></div>
           </div>
           <div className='relative group'>
             <img
