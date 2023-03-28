@@ -46,7 +46,10 @@ export const DrawChoice = () => {
       <div className='text-black font-rye text-3xl'>
             Your draw choice:
       </div>
-      <div className='flex space-x-2 xs:space-x-4'>
+      <div
+        id="draw-choice-cards"
+        className='flex space-x-2 xs:space-x-4'
+      >
         {myDrawChoice.map((card: CardI, index) => {
           // eslint-disable-next-line @typescript-eslint/no-var-requires
           const cardSource = require(`../img/gfx/cards/${card.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '')}.png`)

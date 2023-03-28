@@ -6,7 +6,7 @@ export interface SelectPlayerTargetSlice {
 }
 
 const initialState: SelectPlayerTargetSlice = {
-  value: true
+  value: false
 }
 
 export const selectPlayerTarget = createSlice({

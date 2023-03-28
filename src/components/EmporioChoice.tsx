@@ -43,7 +43,10 @@ export const EmporioChoice = () => {
       <div className='text-black font-rye text-3xl'>
             Emporio:
       </div>
-      <div className='flex space-x-2 xs:space-x-4'>
+      <div
+        id="draw-choice-emporio"
+        className='flex space-x-2 xs:space-x-4'
+      >
         {emporioState.map((card: CardI, index) => {
           // eslint-disable-next-line @typescript-eslint/no-var-requires
           const cardSource = require(`../img/gfx/cards/${card.name.replace(/!/, '').replace(/\s/, '').replace(/\./g, '')}.png`)

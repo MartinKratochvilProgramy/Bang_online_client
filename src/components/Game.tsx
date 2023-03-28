@@ -168,6 +168,7 @@ export const Game = () => {
         } else if (characterName === 'Pedro Ramirez') {
           dispatch(setDeckActiveTrue())
           dispatch(setCharacterUsableTrue())
+          dispatch(setNextTurnFalse())
         } else {
           socket.emit('get_my_draw_choice', { username, currentRoom, character })
         }
