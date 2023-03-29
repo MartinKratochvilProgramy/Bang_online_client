@@ -69,6 +69,7 @@ export const SidePlayerTable: React.FC<Props> = ({ role, oponentName, health, ch
             <img
               src={characterSource}
               style={characterStyles}
+              id={'oponent-' + oponentName}
               onClick={() => { handleCharacterClick() }}
               className='w-[38px] sm:w-[60px] xs:w-[80px] rounded-md ml-2 mr-4'
               alt="Oponent player character">
