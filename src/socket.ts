@@ -3,7 +3,7 @@ import customParser from 'socket.io-msgpack-parser'
 
 // const route = 'bangonlineserver-production.up.railway.app'
 // const route = 'http://localhost:4000'
-const route = 'http://18.159.209.1:4000'
+const route = '18.159.209.1:4000'
 
 export const socket = ioc(route, {
   parser: customParser
