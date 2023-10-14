@@ -39,5 +39,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          # tags: ${{ steps.meta.outputs.tags }}
-          labels: martinkratochvilprogramy/bang-online-client:latest
+          tags: martinkratochvilprogramy/bang-online-client:latest
+          # labels: martinkratochvilprogramy/bang-online-client:latest
