@@ -18,7 +18,9 @@
 .env.test.local
 .env.production.local
 .gitignore
+.github
 .eslintrc.json
+.vscode
 README.md
 
 npm-debug.log*
